@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BilibiliDownloaders", "BilibiliDownloaders\BilibiliDownloaders.vcxproj", "{EA43F4A7-CE86-425F-A66B-BBF4B98B50AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA43F4A7-CE86-425F-A66B-BBF4B98B50AF}.Debug|x64.ActiveCfg = Debug|x64
+		{EA43F4A7-CE86-425F-A66B-BBF4B98B50AF}.Debug|x64.Build.0 = Debug|x64
+		{EA43F4A7-CE86-425F-A66B-BBF4B98B50AF}.Release|x64.ActiveCfg = Release|x64
+		{EA43F4A7-CE86-425F-A66B-BBF4B98B50AF}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01392979-3AF9-4D71-9C7E-FA8366D31B60}
+	EndGlobalSection
+EndGlobal

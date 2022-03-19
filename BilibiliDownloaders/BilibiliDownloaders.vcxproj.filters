@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Translation Files">
+      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
+      <Extensions>ts</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Source Files\MainWindow">
+      <UniqueIdentifier>{578fa2bf-3e60-4f37-8d78-df72ae52dca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\spdlog">
+      <UniqueIdentifier>{6985571e-d1d1-435b-9d71-2b8d23236393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nlohmann">
+      <UniqueIdentifier>{8a178b54-194a-47e6-bedd-ceb8580f1149}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp">
+      <Filter>Source Files\MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="BilibiliDownloaders\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtTranslation Include="bilibilidownloaders_zh.ts">
+      <Filter>Translation Files</Filter>
+    </QtTranslation>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="BilibiliDownloaders\MainWindow\MainWindow.h">
+      <Filter>Source Files\MainWindow</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="BilibiliDownloaders\MainWindow\MainWindow.ui">
+      <Filter>Source Files\MainWindow</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resource\MainWindow.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\nlohmann\adl_serializer.hpp">
+      <Filter>include\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nlohmann\byte_container_with_subtype.hpp">
+      <Filter>include\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nlohmann\json.hpp">
+      <Filter>include\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nlohmann\json_fwd.hpp">
+      <Filter>include\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nlohmann\ordered_map.hpp">
+      <Filter>include\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\async.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\async_logger.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\async_logger-inl.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\common.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\common-inl.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\formatter.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\fwd.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\logger.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\logger-inl.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\pattern_formatter.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\pattern_formatter-inl.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\spdlog.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\spdlog-inl.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\stopwatch.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\tweakme.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spdlog\version.h">
+      <Filter>include\spdlog</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
