@@ -26,6 +26,26 @@
     <Filter Include="include\nlohmann">
       <UniqueIdentifier>{8a178b54-194a-47e6-bedd-ceb8580f1149}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Loger">
+      <UniqueIdentifier>{6aafbc35-14e6-4b11-a5ad-ca5bbcd1fe82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aria2Net">
+      <UniqueIdentifier>{e2f7a41f-16b6-457c-a528-b41b23cbbc26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aria2Net\Protocol">
+      <UniqueIdentifier>{9dba8920-66e7-420b-b99d-9a7db4d75998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aria2Net\AriaClient">
+      <UniqueIdentifier>{f7f2f7ef-360f-477e-b12c-a21c15555dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aria2Net\AriaServer">
+      <UniqueIdentifier>{3015ea5e-bb87-4499-a0e0-40aed49a545a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp">
@@ -34,15 +54,25 @@
     <ClCompile Include="BilibiliDownloaders\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <QtTranslation Include="bilibilidownloaders_zh.ts">
-      <Filter>Translation Files</Filter>
-    </QtTranslation>
+    <ClCompile Include="BilibiliDownloaders\loger\Loger.cpp">
+      <Filter>Source Files\Loger</Filter>
+    </ClCompile>
+    <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.cpp">
+      <Filter>Source Files\Aria2Net\AriaClient</Filter>
+    </ClCompile>
+    <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.cpp">
+      <Filter>Source Files\Aria2Net\AriaServer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BilibiliDownloaders\MainWindow\MainWindow.h">
       <Filter>Source Files\MainWindow</Filter>
+    </QtMoc>
+    <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.h">
+      <Filter>Source Files\Aria2Net\AriaClient</Filter>
+    </QtMoc>
+    <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.h">
+      <Filter>Source Files\Aria2Net\AriaServer</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -119,5 +149,19 @@
     <ClInclude Include="include\spdlog\version.h">
       <Filter>include\spdlog</Filter>
     </ClInclude>
+    <ClInclude Include="BilibiliDownloaders\loger\Loger.h">
+      <Filter>Source Files\Loger</Filter>
+    </ClInclude>
+    <ClInclude Include="BilibiliDownloaders\Aria2Net\Protocol\Protocol.h">
+      <Filter>Source Files\Aria2Net\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="BilibiliDownloaders\Aria2Net\AriaVersion.h">
+      <Filter>Source Files\Aria2Net</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtTranslation Include="Translation\bilibilidownloaders_zh.ts">
+      <Filter>Translation Files</Filter>
+    </QtTranslation>
   </ItemGroup>
 </Project>

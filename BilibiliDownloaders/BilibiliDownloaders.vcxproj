@@ -32,12 +32,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.14.2_msvc2017_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;network;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.14.2_msvc2017_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;network;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -60,7 +60,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;.\BilibiliDownloaders\Aria2Net\Protocol;.\BilibiliDownloaders\Aria2Net\AriaClient;.\BilibiliDownloaders\Aria2Net\AriaServer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -69,7 +69,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;.\BilibiliDownloaders\Aria2Net\Protocol;.\BilibiliDownloaders\Aria2Net\AriaClient;.\BilibiliDownloaders\Aria2Net\AriaServer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -103,11 +103,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.cpp" />
+    <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.cpp" />
+    <ClCompile Include="BilibiliDownloaders\loger\Loger.cpp" />
     <ClCompile Include="BilibiliDownloaders\main.cpp" />
     <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtTranslation Include="bilibilidownloaders_zh.ts" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BilibiliDownloaders\MainWindow\MainWindow.h" />
@@ -119,6 +119,11 @@
     <QtRcc Include="Resource\MainWindow.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.h" />
+    <ClInclude Include="BilibiliDownloaders\Aria2Net\AriaVersion.h" />
+    <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.h" />
+    <ClInclude Include="BilibiliDownloaders\Aria2Net\Protocol\Protocol.h" />
+    <ClInclude Include="BilibiliDownloaders\loger\Loger.h" />
     <ClInclude Include="include\nlohmann\adl_serializer.hpp" />
     <ClInclude Include="include\nlohmann\byte_container_with_subtype.hpp" />
     <ClInclude Include="include\nlohmann\json.hpp" />
@@ -140,6 +145,9 @@
     <ClInclude Include="include\spdlog\stopwatch.h" />
     <ClInclude Include="include\spdlog\tweakme.h" />
     <ClInclude Include="include\spdlog\version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtTranslation Include="Translation\bilibilidownloaders_zh.ts" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

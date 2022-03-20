@@ -1,7 +1,10 @@
 #include "MainWindow/MainWindow.h"
 #include <QtWidgets/QApplication>
 
-#define Test
+#include "loger/Loger.h"
+#include "Protocol.h"
+
+// #define Test
 
 #ifdef Test
 
@@ -368,7 +371,7 @@ int main(int argc, char *argv[])
 
     
    
-
+    LogInfo("fast{}", 10);
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
