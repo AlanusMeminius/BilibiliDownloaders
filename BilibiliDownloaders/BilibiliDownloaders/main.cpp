@@ -1,8 +1,15 @@
+#pragma execution_character_set("utf-8")
+
 #include "MainWindow/MainWindow.h"
 #include <QtWidgets/QApplication>
+#include <QNetworkReply>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
 
+#include "Test/SimpleNetwork.h"
 #include "loger/Loger.h"
 #include "Protocol.h"
+#include "Aria2Net/AriaServer/AriaServer.h"
 
 // #define Test
 
@@ -368,11 +375,11 @@ int main(int argc, char *argv[])
     test_ffmpeg();
 
 #endif // Test
-
-    
    
-    LogInfo("fast{}", 10);
     QApplication a(argc, argv);
+    AriaServer AriaServer;
+    SimpleNetwork simpleNetwork;
+    
     MainWindow w;
     w.show();
     return a.exec();

@@ -217,13 +217,11 @@ public:
     void SetBtMinCryptoLevel(const std::string& btMinCryptoLevel) { m_json["bt-min-crypto-level"] = btMinCryptoLevel; }
     const std::string& GetBtMinCryptoLevel() const { return m_json["bt-min-crypto-level"]; }
 
-
     void SetBtRemoveUnselectedFile(const std::string& btRemoveUnselectedFile) { m_json["bt-remove-unselected-file"] = btRemoveUnselectedFile; }
     const std::string& GetSetBtRemoveUnselectedFile() const { return m_json["bt-remove-unselected-file"]; }
 
     void SetBtRequestPeerSpeedLimit(const std::string& btRequestPeerSpeedLimit) { m_json["bt-request-peer-speed-limit"] = btRequestPeerSpeedLimit; }
     const std::string& GetBtRequestPeerSpeedLimit() const { return m_json["bt-request-peer-speed-limit"]; }
-
 
     void SetBtRequireCrypto(const std::string& btRequireCrypto) { m_json["bt-require-crypto"] = btRequireCrypto; }
     const std::string& GetBtRequireCrypto() const { return m_json["bt-require-crypto"]; }
@@ -312,122 +310,101 @@ public:
     void SetLowestSpeedLimit(const std::string& lowestSpeedLimit) { m_json["lowest-speed-limit"] = lowestSpeedLimit; }
     const std::string& GetLowestSpeedLimit() const { return m_json["lowest-speed-limit"]; }
 
+    void SetMaxConnectionPerServer(const std::string& maxConnectionPerServer) { m_json["max-connection-per-server"] = maxConnectionPerServer; }
+    const std::string& GetMaxConnectionPerServer() const { return m_json["max-connection-per-server"]; }
 
-    //void SetLowestSpeedLimit(const std::string& lowestSpeedLimit) { m_json["lowest-speed-limit"] = lowestSpeedLimit; }
-    //const std::string& GetLowestSpeedLimit() const { return m_json["lowest-speed-limit"]; }
+    void SetMaxDownloadLimit(const std::string& maxDownloadLimit) { m_json["max-download-limit"] = maxDownloadLimit; }
+    const std::string& GetMaxDownloadLimit() const { return m_json["max-download-limit"]; }
 
-    //void SetLowestSpeedLimit(const std::string& lowestSpeedLimit) { m_json["lowest-speed-limit"] = lowestSpeedLimit; }
-    //const std::string& GetLowestSpeedLimit() const { return m_json["lowest-speed-limit"]; }
+    void SetMaxFileNotFound(const std::string& maxFileNotFound) { m_json["max-file-not-found"] = maxFileNotFound; }
+    const std::string& GetMaxFileNotFound() const { return m_json["max-file-not-found"]; }
 
-    //void SetLowestSpeedLimit(const std::string& lowestSpeedLimit) { m_json["lowest-speed-limit"] = lowestSpeedLimit; }
-    //const std::string& GetLowestSpeedLimit() const { return m_json["lowest-speed-limit"]; }
+    void SetMaxMmapLimit(const std::string& maxMmapLimit) { m_json["max-mmap-limit"] = maxMmapLimit; }
+    const std::string& GetMaxMmapLimit() const { return m_json["max-mmap-limit"]; }
 
-    //void SetLowestSpeedLimit(const std::string& lowestSpeedLimit) { m_json["lowest-speed-limit"] = lowestSpeedLimit; }
-    //const std::string& GetLowestSpeedLimit() const { return m_json["lowest-speed-limit"]; }
+    void SeMaxTries(const std::string& maxTries) { m_json["max-tries"] = maxTries; }
+    const std::string& GetMaxTries() const { return m_json["max-tries"]; }
 
-    //void SetLowestSpeedLimit(const std::string& lowestSpeedLimit) { m_json["lowest-speed-limit"] = lowestSpeedLimit; }
-    //const std::string& GetLowestSpeedLimit() const { return m_json["lowest-speed-limit"]; }
+    void SetMaxUploadLimit(const std::string& maxUploadLimit) { m_json["max-upload-limit"] = maxUploadLimit; }
+    const std::string& GetMaxUploadLimit() const { return m_json["max-upload-limit"]; }
+
+    void SetMaxResumeFailureTries(const std::string& maxResumeFailureTries) { m_json["max-upload-limit"] = maxResumeFailureTries; }
+    const std::string& GetMaxResumeFailureTries() const { return m_json["max-resume-failure-tries"]; }
+
+    void SetMetalinkEnableUniqueProtocol(const std::string& metalinkEnableUniqueProtocol) { m_json["metalink-enable-unique-protocol"] = metalinkEnableUniqueProtocol; }
+    const std::string& GetMetalinkEnableUniqueProtocol() const { return m_json["metalink-enable-unique-protocol"]; }
+
+    void SetMetalinkPreferredProtocol(const std::string& metalinkPreferredProtocol) { m_json["metalink-preferred-protocol"] = metalinkPreferredProtocol; }
+    const std::string& GetMetalinkPreferredProtocol() const { return m_json["metalink-preferred-protocol"]; }
+
+    void SetMinSplitSizes(const std::string& minSplitSize) { m_json["min-split-size"] = minSplitSize; }
+    const std::string& GetMinSplitSize() const { return m_json["min-split-size"]; }
+
+    void SetNoFileAllocationLimit(const std::string& noFileAllocationLimit) { m_json["no-file-allocation-limit"] = noFileAllocationLimit; }
+    const std::string& GetNoFileAllocationLimit() const { return m_json["no-file-allocation-limit"]; }
+
+    void SetNoNetrc(const std::string& noNetrc) { m_json["no-netrc"] = noNetrc; }
+    const std::string& GetNoNetrc() const { return m_json["no-netrc"]; }
+
+    void SetOut(const std::string& out) { m_json["out"] = out; }
+    const std::string& GetOut() const { return m_json["out"]; }
+
+    void SetParameterizedUri(const std::string& parameterizedUri) { m_json["parameterized-uri"] = parameterizedUri; }
+    const std::string& GetParameterizedUri() const { return m_json["parameterized-uri"]; }
+
+    void SetPauseMetadata(const std::string& pauseMetadata) { m_json["pause-metadata"] = pauseMetadata; }
+    const std::string& GetPauseMetadata() const { return m_json["pause-metadata"]; }
+
+    void SetPieceLength(const std::string& pieceLength) { m_json["piece-length"] = pieceLength; }
+    const std::string& GetPieceLength() const { return m_json["piece-length"]; }
+
+    void SetProxyMethod(const std::string& proxyMethod) { m_json["proxy-method"] = proxyMethod; }
+    const std::string& GetProxyMethod() const { return m_json["proxy-method"]; }
+
+    void SetRealtimeChunkChecksum(const std::string& realtimeChunkChecksum) { m_json["realtime-chunk-checksum"] = realtimeChunkChecksum; }
+    const std::string& GetRealtimeChunkChecksum() const { return m_json["realtime-chunk-checksum"]; }
+
+    void SetRemoteTime(const std::string& remoteTime) { m_json["remote-time"] = remoteTime; }
+    const std::string& GetRemoteTime() const { return m_json["remote-time"]; }
+
+    void SetRemoveControlFile(const std::string& removeControlFile) { m_json["no-remove-control-file"] = removeControlFile; }
+    const std::string& GetRemoveControlFile() const { return m_json["remove-control-file"]; }
+
+    void SetRetryWait(const std::string& retryWait) { m_json["retry-wait"] = retryWait; }
+    const std::string& GetRetryWait() const { return m_json["retry-wait"]; }
+
+    void SetReuseUri(const std::string& reuseUri) { m_json["reuse-uri"] = reuseUri; }
+    const std::string& GetReuseUri() const { return m_json["reuse-uri"]; }
+
+    void SetRpcSaveuploadMetadata(const std::string& rpcSaveuploadMetadata) { m_json["rpc-save-upload-metadata"] = rpcSaveuploadMetadata; }
+    const std::string& GetRpcSaveuploadMetadata() const { return m_json["rpc-save-upload-metadata"]; }
+
+    void SetSaveNotFound(const std::string& saveNotFound) { m_json["save-not-found"] = saveNotFound; }
+    const std::string& GetSaveNotFound() const { return m_json["save-not-found"]; }
+
+    void SetSeedRatio(const std::string& seedRatio) { m_json["seed-ratio"] = seedRatio; }
+    const std::string& GetSeedRatio() const { return m_json["seed-ratio"]; }
+
+    void SetSplit(const std::string& split) { m_json["split"] = split; }
+    const std::string& GetSplit() const { return m_json["split"]; }
+
+    void SetStreamPieceSelector(const std::string& streamPieceSelector) { m_json["stream-piece-selector"] = streamPieceSelector; }
+    const std::string& GetStreamPieceSelector() const { return m_json["stream-piece-selector"]; }
+
+    void SetTimeout(const std::string& timeout) { m_json["timeout"] = timeout; }
+    const std::string& GetTimeout() const { return m_json["timeout"]; }
+
+    void SetUriSelector(const std::string& uriSelector) { m_json["uri-selector"] = uriSelector; }
+    const std::string& GetUriSelector() const { return m_json["uri-selector"]; }
+
+    void SetUseHead(const std::string& useHead) { m_json["use-head"] = useHead; }
+    const std::string& GetUseHead() const { return m_json["use-head"]; }
+
+    void SetUserAgent(const std::string& userAgent) { m_json["user-agent"] = userAgent; }
+    const std::string& GetUserAgent() const { return m_json["user-agent"]; }
 
 };
-
 using AriaGetOption = AriaBasicJson<AriaOption>;
-
-
-
-
-
-    //    [JsonProperty("max-connection-per-server")]
-    //public string MaxConnectionPerServer{ get; set; }
-
-    //    [JsonProperty("max-download-limit")]
-    //public string MaxDownloadLimit{ get; set; }
-
-    //    [JsonProperty("max-file-not-found")]
-    //public string MaxFileNotFound{ get; set; }
-
-    //    [JsonProperty("max-mmap-limit")]
-    //public string MaxMmapLimit{ get; set; }
-
-    //    [JsonProperty("max-resume-failure-tries")]
-    //public string MaxResumeFailureTries{ get; set; }
-
-    //    [JsonProperty("max-tries")]
-    //public string MaxTries{ get; set; }
-
-    //    [JsonProperty("max-upload-limit")]
-    //public string MaxUploadLimit{ get; set; }
-
-    //    [JsonProperty("metalink-enable-unique-protocol")]
-    //public string MetalinkEnableUniqueProtocol{ get; set; }
-
-    //    [JsonProperty("metalink-preferred-protocol")]
-    //public string MetalinkPreferredProtocol{ get; set; }
-
-    //    [JsonProperty("min-split-size")]
-    //public string MinSplitSize{ get; set; }
-
-    //    [JsonProperty("no-file-allocation-limit")]
-    //public string NoFileAllocationLimit{ get; set; }
-
-    //    [JsonProperty("no-netrc")]
-    //public string NoNetrc{ get; set; }
-
-    //    [JsonProperty("out")]
-    //public string Out{ get; set; }
-
-    //    [JsonProperty("parameterized-uri")]
-    //public string ParameterizedUri{ get; set; }
-
-    //    [JsonProperty("pause-metadata")]
-    //public string PauseMetadata{ get; set; }
-
-    //    [JsonProperty("piece-length")]
-    //public string PieceLength{ get; set; }
-
-    //    [JsonProperty("proxy-method")]
-    //public string ProxyMethod{ get; set; }
-
-    //    [JsonProperty("realtime-chunk-checksum")]
-    //public string RealtimeChunkChecksum{ get; set; }
-
-    //    [JsonProperty("remote-time")]
-    //public string RemoteTime{ get; set; }
-
-    //    [JsonProperty("remove-control-file")]
-    //public string RemoveControlFile{ get; set; }
-
-    //    [JsonProperty("retry-wait")]
-    //public string RetryWait{ get; set; }
-
-    //    [JsonProperty("reuse-uri")]
-    //public string ReuseUri{ get; set; }
-
-    //    [JsonProperty("rpc-save-upload-metadata")]
-    //public string RpcSaveUploadMetadata{ get; set; }
-
-    //    [JsonProperty("save-not-found")]
-    //public string SaveNotFound{ get; set; }
-
-    //    [JsonProperty("seed-ratio")]
-    //public string SeedRatio{ get; set; }
-
-    //    [JsonProperty("split")]
-    //public string Split{ get; set; }
-
-    //    [JsonProperty("stream-piece-selector")]
-    //public string StreamPieceSelector{ get; set; }
-
-    //    [JsonProperty("timeout")]
-    //public string Timeout{ get; set; }
-
-    //    [JsonProperty("uri-selector")]
-    //public string UriSelector{ get; set; }
-
-    //    [JsonProperty("use-head")]
-    //public string UseHead{ get; set; }
-
-    //    [JsonProperty("user-agent")]
-    //public string UserAgent{ get; set; }
 
 class AriaPeer : public Protocol
 {

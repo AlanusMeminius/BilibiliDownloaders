@@ -41,10 +41,8 @@
     <Filter Include="Source Files\Aria2Net\AriaServer">
       <UniqueIdentifier>{3015ea5e-bb87-4499-a0e0-40aed49a545a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-      <ParseFiles>true</ParseFiles>
+    <Filter Include="Source Files\Test">
+      <UniqueIdentifier>{d2975afb-0c5f-4992-9fa5-80c68281b1a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +61,9 @@
     <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.cpp">
       <Filter>Source Files\Aria2Net\AriaServer</Filter>
     </ClCompile>
+    <ClCompile Include="BilibiliDownloaders\Test\SimpleNetwork.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BilibiliDownloaders\MainWindow\MainWindow.h">
@@ -73,6 +74,9 @@
     </QtMoc>
     <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.h">
       <Filter>Source Files\Aria2Net\AriaServer</Filter>
+    </QtMoc>
+    <QtMoc Include="BilibiliDownloaders\Test\SimpleNetwork.h">
+      <Filter>Source Files\Test</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

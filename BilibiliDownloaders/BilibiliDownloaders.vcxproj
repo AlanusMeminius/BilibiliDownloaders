@@ -108,6 +108,7 @@
     <ClCompile Include="BilibiliDownloaders\loger\Loger.cpp" />
     <ClCompile Include="BilibiliDownloaders\main.cpp" />
     <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp" />
+    <ClCompile Include="BilibiliDownloaders\Test\SimpleNetwork.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BilibiliDownloaders\MainWindow\MainWindow.h" />
@@ -124,6 +125,7 @@
     <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.h" />
     <ClInclude Include="BilibiliDownloaders\Aria2Net\Protocol\Protocol.h" />
     <ClInclude Include="BilibiliDownloaders\loger\Loger.h" />
+    <QtMoc Include="BilibiliDownloaders\Test\SimpleNetwork.h" />
     <ClInclude Include="include\nlohmann\adl_serializer.hpp" />
     <ClInclude Include="include\nlohmann\byte_container_with_subtype.hpp" />
     <ClInclude Include="include\nlohmann\json.hpp" />

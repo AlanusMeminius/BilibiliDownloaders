@@ -11,7 +11,7 @@ class AriaServer : public QObject
     Q_OBJECT
 
 public:
-    AriaServer(QObject *parent);
+    AriaServer(QObject* parent = nullptr);
     ~AriaServer();
     void StartServerAsync();
 };
