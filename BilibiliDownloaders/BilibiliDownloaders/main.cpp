@@ -6,12 +6,15 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 
+#include <ObjBase.h>
+
 #include "Test/SimpleNetwork.h"
 #include "loger/Loger.h"
 #include "Protocol.h"
 #include "Aria2Net/AriaServer/AriaServer.h"
 #include "Aria2Net/AriaClient/AriaClient.h"
 #include "FFmpeg/FFmpegHelper.h"
+#include "Aria2Net/Protocol/Protocol.h"
 
 // #define Test
 
@@ -294,6 +297,22 @@ int test_ffmpeg()
 #endif // Test
 
 
+std::string GenerateGuid()
+{
+    GUID guid;
+    CoCreateGuid(&guid);
+    char cBuffer[64] = { 0 };
+    sprintf_s(cBuffer, sizeof(cBuffer),
+        "%08X%04X%04X%02X%02X%02X%02X%02X%02X%02X%02X",
+        guid.Data1, guid.Data2,
+        guid.Data3, guid.Data4[0],
+        guid.Data4[1], guid.Data4[2],
+        guid.Data4[3], guid.Data4[4],
+        guid.Data4[5], guid.Data4[6],
+        guid.Data4[7]);
+
+    return std::string(cBuffer);
+}
 
 
 int main(int argc, char *argv[])
@@ -382,13 +401,32 @@ int main(int argc, char *argv[])
     aria2net::AriaServer AriaServer;
     SimpleNetwork simpleNetwork;
     aria2net::AriaClient ariaClient;
+    
 
     nlohmann::json json;
     json["fav_id"] = "99184721";
     json["biz_type"] = "2";
     //json["cookie"] = "buvid3=B3B4EAE9-9253-F3D9-8C60-C246E56B920589724infoc; _uuid=734A72C8-16E1-D6B10-6AC8-10EF8910F15C3989392infoc; blackside_state=1; rpdid=0zbfAHJovL|5BgcxYFU|3eP|3w1MSWvJ; video_page_version=v_old_home; LIVE_BUVID=AUTO9916384917126731; sid=bk3ft85m; fingerprint=e1aee79dc22cd0b3f0668009d49d02d4; buvid_fp_plain=B3B4EAE9-9253-F3D9-8C60-C246E56B920589724infoc; DedeUserID=287031869; DedeUserID__ckMd5=e26fb0593e97d8fc; SESSDATA=a44128a9%2C1654764587%2C94d03*c1; bili_jct=271f101a4d37853f339b84c6202904e2; i-wanna-go-back=-1; b_ut=5; buvid4=9C93EF9A-7F4E-035A-203A-90FE5082E3C519443-022020421-9TO+hWhxQHMnx8ShDLZrEbchd/A4l8nP2exKxyNZ3er/tlneEFjSDg%3D%3D; buvid_fp=0e2e0d8ea52d21fd63fd81fc0ee84b05; CURRENT_BLACKGAP=0; bp_video_offset_287031869=641915508515406000; PVID=1; nostalgia_conf=-1; CURRENT_FNVAL=4048; CURRENT_QUALITY=16; innersign=0; b_lsid=DC94FA64_17FD0FBC70E";
 
-    ariaClient.Request(QString("http://api.vc.bilibili.com/user_plus/v1/Fav/add"), json.dump());
+    // ariaClient.Request(QString("http://api.vc.bilibili.com/user_plus/v1/Fav/add"), json.dump());
+
+    aria2net::AriaSendOption ariaSendOption;
+    ariaSendOption.SetDir(QApplication::applicationFilePath().toStdString());
+    ariaSendOption.SetOut("qq.exe");
+
+    aria2net::AriaSendData sendDate;
+    
+
+    std::list<std::string> params;
+    params.emplace_back("token:downkyi");
+    params.emplace_back("[\"http://dl_dir.qq.com/qqfile/qq/QQ2011/QQ2011.exe\"]");
+    params.emplace_back(ariaSendOption.toString());
+    sendDate.SetId(GenerateGuid());
+    sendDate.SetMethod("aria2.addUri");
+    sendDate.SetJsonrpc("2.0");
+    sendDate.SetParams(params);
+
+    ariaClient.Request(sendDate.toString());
 
     const std::string audeo = "test.mp3";
     const std::string video = "test.mp4";

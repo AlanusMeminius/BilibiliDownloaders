@@ -5,6 +5,10 @@
 #include <QUrl>
 #include <QFile>
 
+#include <chrono>
+#include <thread>
+#include <future>
+
 #include <nlohmann/json.hpp>
 
 #include "loger/Loger.h"
@@ -22,25 +26,32 @@ const QString GetRpcUri(int listenPort = 6800)
 
 
 aria2net::AriaClient::AriaClient(QObject *parent)
-    : QObject(parent)
-    , m_networkAccessManager(new QNetworkAccessManager(this))
+    : QThread(parent)
+    , m_networkAccessManager(nullptr)
 {
+    m_networkAccessManager = new QNetworkAccessManager(this);
+    connect(m_networkAccessManager, &QNetworkAccessManager::finished, this, &AriaClient::Response);
+    
 }
 
 aria2net::AriaClient::~AriaClient()
 {
+
 }
 
-void aria2net::AriaClient::Request(const QString& url, const std::string& parameters, int retry)
+void aria2net::AriaClient::Request(const QString& url, const QString& parameters, int retry)
 {
-    QByteArray sendData(parameters.data());
+    QByteArray sendData = parameters.toLocal8Bit();
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setHeader(QNetworkRequest::ContentLengthHeader, sendData.size());
 
     QNetworkReply* reply = m_networkAccessManager->post(request, sendData);
+}
 
-
+void aria2net::AriaClient::Request(const std::string& parameters, int retry)
+{
+    Request(GetRpcUri(), QString("{{\"id\":\"3E7E7D183C08426FBBBD50167B79F94F\",\"jsonrpc\":\"2.0\", \"method\" : \"aria2.addUri\",\"params\" : [\"token:downkyi\", [\"http://dl_dir.qq.com/qqfile/qq/QQ2011/QQ2011.exe\"],{\"dir\":\"D:/workfile/BilibiliDownloaders/x64/Debug/BilibiliDownloaders.exe\",\"out\" : \"qq.exe\" }]}}"), retry);
 }
 
 void aria2net::AriaClient::Response(QNetworkReply* reply)
@@ -68,14 +79,14 @@ void aria2net::AriaClient::Response(QNetworkReply* reply)
 
     QByteArray rep = reply->readAll();
 
-    QFile file("text.mp4");
-    if (file.open(QIODevice::WriteOnly))
-    {
-        file.write(rep);
-    }
-    file.close();
-
+    QString string(rep);
 
     reply->deleteLater();
     reply = nullptr;
+
+}
+
+void aria2net::AriaClient::run()
+{
+    exec();
 }

@@ -12,7 +12,7 @@ public:
     Protocol() = default;
     Protocol(nlohmann::json json) : m_json(std::move(json)) {}
     virtual ~Protocol() = default;
-    virtual const std::string toString() { m_json.dump(); };
+    virtual const std::string toString() { return m_json.dump(); };
     virtual void request() {};
 
     void SetJson(const nlohmann::json& json) { m_json = json; }
@@ -61,7 +61,6 @@ public:
     AriaUri(nlohmann::json json) : Protocol(std::move(json)) { }
     ~AriaUri() = default;
 
-    // const std::string toString() override { m_json.dump(); }
     void request() override {};
 
     void SetStatus(const std::string& status) { m_json["status"] = status; }
@@ -80,7 +79,6 @@ public:
     AriaBasicJson(nlohmann::json json) : Protocol(std::move(json)) { }
     ~AriaBasicJson() = default;
 
-    const std::string toString() override { m_json.dump(); }
     void request() override {};
 
     void SetId(const std::string& id) { m_json["id"] = id; }
@@ -111,7 +109,6 @@ public:
     AriaGetFilesResult(nlohmann::json json) : Protocol(std::move(json)) { }
     ~AriaGetFilesResult() = default;
 
-    const std::string toString() override { m_json.dump(); }
     void request() override {};
 
     void SetCompletedLength(const std::string& id) { m_json["completedLength"] = id; }
@@ -140,7 +137,6 @@ public:
     AriaGetGlobalStatResult(nlohmann::json json) : Protocol(std::move(json)) { }
     ~AriaGetGlobalStatResult() = default;
 
-    const std::string toString() override { m_json.dump(); }
     void request() override {};
 
     void SetDownloadSpeed(const std::string& downloadSpeed) { m_json["downloadSpeed"] = downloadSpeed; }
@@ -172,7 +168,6 @@ public:
     AriaOption(nlohmann::json json) : Protocol(std::move(json)) { }
     ~AriaOption() = default;
 
-    const std::string toString() override { m_json.dump(); }
     void request() override {};
 
     void SetAllProxy(const std::string& allProxy) { m_json["all-proxy"] = allProxy; }
@@ -413,7 +408,6 @@ public:
     AriaPeer(nlohmann::json json) : Protocol(std::move(json)) { }
     ~AriaPeer() = default;
 
-    const std::string toString() override { m_json.dump(); }
     void request() override {};
 
     void SetAmChoking(const std::string& amChoking) { m_json["amChoking"] = amChoking; }
@@ -453,7 +447,6 @@ public:
     AriaResultServer(nlohmann::json json) : Protocol(std::move(json)) { }
     ~AriaResultServer() = default;
 
-    const std::string toString() override { m_json.dump(); }
     void request() override {};
 
     void SetCurrentUri(const std::string& currentUri) { m_json["currentUri"] = currentUri; }
@@ -473,7 +466,6 @@ public:
     AriaGetServersResult(nlohmann::json json) : Protocol(std::move(json)) { }
     ~AriaGetServersResult() = default;
 
-    const std::string toString() override { m_json.dump(); }
     void request() override {};
 
     void SetIndex(const std::string& index) { m_json["index"] = index; }
@@ -492,7 +484,6 @@ public:
     AriaGetSessionInfoResult(nlohmann::json json) : Protocol(std::move(json)) { }
     ~AriaGetSessionInfoResult() = default;
 
-    const std::string toString() override { m_json.dump(); }
     void request() override {};
 
     void SetSessionId(const std::string& sessionId) { m_json["sessionId"] = sessionId; }
@@ -505,7 +496,6 @@ using AriaPause = AriaBasicJson<std::string>;
 using AriaRemove = AriaBasicJson<std::string>; 
 using AriaSaveSession = AriaBasicJson<std::string>;
 using AriaShutdown = AriaBasicJson<std::string>;
-using AriaShutdown = AriaBasicJson<std::string>;
 
 class AriaVersionResult : public Protocol
 {
@@ -514,7 +504,6 @@ public:
     AriaVersionResult(nlohmann::json json) : Protocol(std::move(json)) { }
     ~AriaVersionResult() = default;
 
-    const std::string toString() override { m_json.dump(); }
     void request() override {};
 
     void SetEnabledFeatures(const std::string& enabledFeatures) { m_json["enabledFeatures"] = enabledFeatures; }
@@ -535,7 +524,6 @@ public:
     SystemMulticallMathod(nlohmann::json json) : Protocol(std::move(json)) { }
     ~SystemMulticallMathod() = default;
 
-    const std::string toString() override { m_json.dump(); }
     void request() override {};
 
     void SetMethod(const std::string& method) { m_json["method"] = method; }
@@ -544,5 +532,51 @@ public:
     void SetServers(const std::list<std::string>& params) { m_json["params"] = params; }
     const std::list<std::string>& GetServers() const { return m_json["params"]; }
 };
+
+class AriaSendData : public Protocol
+{
+public:
+    AriaSendData() = default;
+    AriaSendData(nlohmann::json json) : Protocol(std::move(json)) { }
+    ~AriaSendData() = default;
+
+
+    void request() override {};
+
+    void SetId(const std::string& id) { m_json["id"] = id; }
+    const std::string& GetId() const { return m_json["id"]; };
+
+    void SetJsonrpc(const std::string& jsonrpc) { m_json["jsonrpc"] = jsonrpc; }
+    const std::string& GetJsonrpc() const { return m_json["jsonrpc"]; };
+
+    void SetMethod(const std::string& method) { m_json["method"] = method; }
+    const std::string& GetMethod() const { return m_json["method"]; }
+
+    void SetParams(const std::list<std::string>& params) { m_json["params"] = params; }
+    const std::list<std::string>& GetParams() const { return m_json["params"]; }
+};
+
+class AriaSendOption : public Protocol
+{
+public:
+    AriaSendOption() = default;
+    AriaSendOption(nlohmann::json json) : Protocol(std::move(json)) { }
+    ~AriaSendOption() = default;
+
+    void request() override {};
+
+    void SetAllProxy(const std::string& allProxy) { m_json["all-proxy"] = allProxy; }
+    const std::string& GetAllProxy() const { return m_json["all-proxy"]; };
+
+    void SetOut(const std::string& out) { m_json["out"] = out; }
+    const std::string& GetOut() const { return m_json["out"]; };
+
+    void SetDir(const std::string& method) { m_json["dir"] = method; }
+    const std::string& GetDie() const { return m_json["dir"]; }
+
+
+};
+
+
 
 } // namespace aria2net

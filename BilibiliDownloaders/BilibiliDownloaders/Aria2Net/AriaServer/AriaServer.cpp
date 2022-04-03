@@ -85,7 +85,7 @@ void AriaServer::StartServerAsync()
                              NULL,                                          // 不继承进程句柄
                              NULL,                                          // 不继承线程句柄
                              FALSE,                                         // 不继承句柄
-                             0,                                             // 没有创建标志
+            CREATE_NEW_CONSOLE,                                             // 没有创建标志
                              NULL,                                          // 使用父进程环境变量
                              NULL,                                          // 使用父进程目录作为当前目录
                              &si,                                           // STARTUPINFO 结构

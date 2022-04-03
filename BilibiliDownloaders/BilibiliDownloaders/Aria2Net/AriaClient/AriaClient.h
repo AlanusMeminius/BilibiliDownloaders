@@ -2,11 +2,13 @@
 
 #include <QObject>
 #include <QNetworkAccessManager>
+#include <QEventLoop>
+#include <QThread>
 
 namespace aria2net
 {
 
-class AriaClient : public QObject
+class AriaClient : public QThread
 {
     Q_OBJECT
 private:
@@ -17,14 +19,14 @@ public:
     AriaClient(QObject* parent = nullptr);
     ~AriaClient();
 
-    void Request(const QString& url, const std::string& parameters, int retry = 3);
-    inline void Request(const std::string& url, const std::string& parameters, int retry = 3)
-    {
-        Request(url, parameters, retry);
-    }
+    void Request(const QString& url, const QString& parameters, int retry = 3);
+    void Request(const std::string& parameters, int retry = 3);
+
     
     void Response(QNetworkReply* reply);
+
 protected:
+    void run() override;
     QNetworkAccessManager* m_networkAccessManager;
 };
 
