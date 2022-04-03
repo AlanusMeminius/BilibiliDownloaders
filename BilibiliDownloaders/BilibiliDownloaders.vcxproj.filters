@@ -44,6 +44,12 @@
     <Filter Include="Source Files\Test">
       <UniqueIdentifier>{d2975afb-0c5f-4992-9fa5-80c68281b1a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\BiliApi">
+      <UniqueIdentifier>{76822b16-f1af-42b1-b92a-685c2d089769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FFmpeg">
+      <UniqueIdentifier>{148d3639-46ed-49d3-98c5-62f843ee5f23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp">
@@ -63,6 +69,9 @@
     </ClCompile>
     <ClCompile Include="BilibiliDownloaders\Test\SimpleNetwork.cpp">
       <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.cpp">
+      <Filter>Source Files\FFmpeg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +170,9 @@
     </ClInclude>
     <ClInclude Include="BilibiliDownloaders\Aria2Net\AriaVersion.h">
       <Filter>Source Files\Aria2Net</Filter>
+    </ClInclude>
+    <ClInclude Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.h">
+      <Filter>Source Files\FFmpeg</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

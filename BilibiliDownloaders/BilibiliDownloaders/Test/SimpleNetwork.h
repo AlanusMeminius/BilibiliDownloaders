@@ -2,6 +2,8 @@
 
 #include <QObject>
 
+#include <QFile>
+
 class QNetworkAccessManager;
 class SimpleNetwork : public QObject
 {
@@ -13,4 +15,6 @@ public:
 
 private:
     QNetworkAccessManager* m_networkAccessManager;
+    QFile m_videoFile;
+    QFile m_audeoFile;
 };

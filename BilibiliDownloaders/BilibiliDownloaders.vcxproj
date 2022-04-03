@@ -61,6 +61,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;.\BilibiliDownloaders\Aria2Net\Protocol;.\BilibiliDownloaders\Aria2Net\AriaClient;.\BilibiliDownloaders\Aria2Net\AriaServer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -70,6 +71,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;.\BilibiliDownloaders\Aria2Net\Protocol;.\BilibiliDownloaders\Aria2Net\AriaClient;.\BilibiliDownloaders\Aria2Net\AriaServer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -105,6 +107,7 @@
   <ItemGroup>
     <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.cpp" />
     <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.cpp" />
+    <ClCompile Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.cpp" />
     <ClCompile Include="BilibiliDownloaders\loger\Loger.cpp" />
     <ClCompile Include="BilibiliDownloaders\main.cpp" />
     <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp" />
@@ -124,6 +127,7 @@
     <ClInclude Include="BilibiliDownloaders\Aria2Net\AriaVersion.h" />
     <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.h" />
     <ClInclude Include="BilibiliDownloaders\Aria2Net\Protocol\Protocol.h" />
+    <ClInclude Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.h" />
     <ClInclude Include="BilibiliDownloaders\loger\Loger.h" />
     <QtMoc Include="BilibiliDownloaders\Test\SimpleNetwork.h" />
     <ClInclude Include="include\nlohmann\adl_serializer.hpp" />

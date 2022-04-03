@@ -6,6 +6,8 @@
 #include <nlohmann/json.hpp>
 #include <QSslSocket>
 
+#include <QEventLoop>
+
 SimpleNetwork::SimpleNetwork(QObject *parent)
     : QObject(parent)
     , m_networkAccessManager(new QNetworkAccessManager(this))
@@ -15,14 +17,10 @@ SimpleNetwork::SimpleNetwork(QObject *parent)
     // std::string referer = "https://www.bilibili.com";
     std::string url;
     url = baseUrl + "?bvid=" + bvid;
-    // qDebug() << url;
-
+    url = "https://qoogwqhm.v1d.szbdyd.com:2996/upgcxcode/93/45/557884593/557884593_nb2-1-30080.m4s?xyip=112.12.135.213&xyport=2996&xy_usource=upos-sz-mirrorhw.bilivideo.com&xy_mark=rsc-upos-sz-mirrorhw.disp.bilivideo.com&e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&nbs=1&deadline=1648975247&gen=playurlv2&os=rsc&oi=666253600&trid=f9c608da97e442f5870b83b92381a31cu&platform=pc&upsig=ebda3a8537d2e46e5f3db73dbf5ec938&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&pcdnid=1000007207&mid=0&bvc=vod&nettype=0&orderid=0,3&agrr=1&bw=132895&logo=80000000";
+    // url = "https://qoogwqjt.v1d.szbdyd.com:13260/upgcxcode/93/45/557884593/557884593_nb2-1-30280.m4s?xyip=112.12.135.195&xyport=13260&xy_usource=upos-sz-mirrorcos.bilivideo.com&xy_mark=rsc-upos-sz-mirrorcos.disp.bilivideo.com&e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&nbs=1&deadline=1648975247&gen=playurlv2&os=rsc&oi=666253600&trid=f9c608da97e442f5870b83b92381a31cu&platform=pc&upsig=6a0bac480c1257e817212832ba5b54cd&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&pcdnid=1000007207&mid=0&bvc=vod&nettype=0&orderid=0,3&agrr=1&bw=39953&logo=80000000";
     QNetworkRequest request;
     request.setUrl(QUrl(QString::fromLocal8Bit(url.data())));
-    // request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QString strVersion = QSslSocket::sslLibraryBuildVersionString();
-
     const QByteArray referer("https://www.bilibili.com");
     const QByteArray userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 Edg/90.0.818.49");
     request.setMaximumRedirectsAllowed(0);
@@ -33,40 +31,45 @@ SimpleNetwork::SimpleNetwork(QObject *parent)
     QNetworkReply* reply = m_networkAccessManager->get(request);
     if (reply)
     {
-        connect(m_networkAccessManager, &QNetworkAccessManager::finished, [&](QNetworkReply* reply) {
+        m_audeoFile.setFileName("test.mp3");
+        if (!m_audeoFile.open(QIODevice::WriteOnly))
+        {
+            return;
+        }
 
-                // abort() is called.
-                if (reply->error() == QNetworkReply::OperationCanceledError) {
-                    reply->abort();
-                    return;
-                }
-                if (reply->error() != QNetworkReply::NoError) {
-                    qDebug() << "network error:" << reply->errorString() << ", url=" << reply->url().toString();
-                    return;
-                }
-                //if (!reply->header(QNetworkRequest::ContentTypeHeader).toString().contains("json")) {
-                //    return;
-                //}
-
-                qDebug() << "reply from" << reply->url();
-                QByteArray rep = reply->readAll();
-
-                std::string strRep = QString::fromUtf8(rep).toStdString();
-                qDebug() << QString::fromUtf8(rep);
-                if (QString::fromUtf8(rep).contains("message"))
-                {
-                    nlohmann::json json = nlohmann::json::parse(strRep);
-                    std::string bvide = json["data"]["bvid"];
-                    qDebug() << "ok";
-                }
-
-
-                reply->deleteLater();
-                reply = nullptr;
+        connect(reply, &QNetworkReply::readyRead, [&]() {
+            m_audeoFile.write(reply->readAll());
         });
+
+        QEventLoop eventLoop;
+        connect(reply, &QNetworkReply::finished, [&]() {
+            eventLoop.quit();
+        });
+        eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
     }
-    
-    
+
+    url = "https://qoogwqjt.v1d.szbdyd.com:13260/upgcxcode/93/45/557884593/557884593_nb2-1-30280.m4s?xyip=112.12.135.195&xyport=13260&xy_usource=upos-sz-mirrorcos.bilivideo.com&xy_mark=rsc-upos-sz-mirrorcos.disp.bilivideo.com&e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&nbs=1&deadline=1648975247&gen=playurlv2&os=rsc&oi=666253600&trid=f9c608da97e442f5870b83b92381a31cu&platform=pc&upsig=6a0bac480c1257e817212832ba5b54cd&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&pcdnid=1000007207&mid=0&bvc=vod&nettype=0&orderid=0,3&agrr=1&bw=39953&logo=80000000";
+
+    request.setUrl(QUrl(QString::fromLocal8Bit(url.data())));
+    reply = m_networkAccessManager->get(request);
+    if (reply)
+    {
+        m_videoFile.setFileName("test.mp4");
+        if (!m_videoFile.open(QIODevice::WriteOnly))
+        {
+            return;
+        }
+
+        connect(reply, &QNetworkReply::readyRead, [&]() {
+            m_videoFile.write(reply->readAll());
+        });
+
+        QEventLoop eventLoop;
+        connect(reply, &QNetworkReply::finished, [&]() {
+            eventLoop.quit();
+        });
+        eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+    }
 }
 
 SimpleNetwork::~SimpleNetwork()
