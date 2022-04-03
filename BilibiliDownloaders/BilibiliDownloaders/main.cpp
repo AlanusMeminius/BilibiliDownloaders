@@ -421,6 +421,7 @@ int main(int argc, char *argv[])
     params.emplace_back("token:downkyi");
     params.emplace_back("[\"http://dl_dir.qq.com/qqfile/qq/QQ2011/QQ2011.exe\"]");
     params.emplace_back(ariaSendOption.toString());
+    std::string id = GenerateGuid();
     sendDate.SetId(GenerateGuid());
     sendDate.SetMethod("aria2.addUri");
     sendDate.SetJsonrpc("2.0");

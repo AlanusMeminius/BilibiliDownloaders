@@ -15,5 +15,6 @@ Logger::Logger()
 
 Logger::~Logger()
 {
+    m_logFile->flush();
     spdlog::shutdown();
 }
