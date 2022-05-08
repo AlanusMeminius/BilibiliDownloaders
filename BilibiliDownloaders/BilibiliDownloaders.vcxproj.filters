@@ -53,6 +53,9 @@
     <Filter Include="Source Files\VideoList">
       <UniqueIdentifier>{3fa1e496-456b-4c05-ba8a-0527e19df21f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Util">
+      <UniqueIdentifier>{6db8b2a3-abbe-4983-896a-a5de413a8071}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp">
@@ -81,6 +84,12 @@
     </ClCompile>
     <ClCompile Include="BilibiliDownloaders\BiliApi\BiliApi.cpp">
       <Filter>Source Files\BiliApi</Filter>
+    </ClCompile>
+    <ClCompile Include="BilibiliDownloaders\Test\testmain.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="UrlProcess.cpp">
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="BilibiliDownloaders\BiliApi\BiliApi.h">
       <Filter>Source Files\BiliApi</Filter>
+    </ClInclude>
+    <ClInclude Include="UrlProcess.h">
+      <Filter>Source Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

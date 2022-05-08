@@ -113,7 +113,9 @@
     <ClCompile Include="BilibiliDownloaders\main.cpp" />
     <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp" />
     <ClCompile Include="BilibiliDownloaders\Test\SimpleNetwork.cpp" />
+    <ClCompile Include="BilibiliDownloaders\Test\testmain.cpp" />
     <ClCompile Include="BilibiliDownloaders\VideoList\VideoListWidget.cpp" />
+    <ClCompile Include="UrlProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BilibiliDownloaders\MainWindow\MainWindow.h" />
@@ -126,6 +128,7 @@
     <QtRcc Include="Resource\MainWindow.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="UrlProcess.h" />
     <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.h" />
     <ClInclude Include="BilibiliDownloaders\AppVersion.h" />
     <ClInclude Include="BilibiliDownloaders\Aria2Net\AriaVersion.h" />
