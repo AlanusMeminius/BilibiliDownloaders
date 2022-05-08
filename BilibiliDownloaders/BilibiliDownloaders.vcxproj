@@ -60,7 +60,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;.\BilibiliDownloaders\Aria2Net\Protocol;.\BilibiliDownloaders\Aria2Net\AriaClient;.\BilibiliDownloaders\Aria2Net\AriaServer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;.\BilibiliDownloaders\Aria2Net\Protocol;.\BilibiliDownloaders\Aria2Net\AriaClient;.\BilibiliDownloaders\Aria2Net\AriaServer;.\BilibiliDownloaders\VideoList;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -70,7 +70,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;.\BilibiliDownloaders\Aria2Net\Protocol;.\BilibiliDownloaders\Aria2Net\AriaClient;.\BilibiliDownloaders\Aria2Net\AriaServer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;.\BilibiliDownloaders\Aria2Net\Protocol;.\BilibiliDownloaders\Aria2Net\AriaClient;.\BilibiliDownloaders\Aria2Net\AriaServer;.\BilibiliDownloaders\VideoList;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -107,29 +107,35 @@
   <ItemGroup>
     <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.cpp" />
     <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.cpp" />
+    <ClCompile Include="BilibiliDownloaders\BiliApi\BiliApi.cpp" />
     <ClCompile Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.cpp" />
     <ClCompile Include="BilibiliDownloaders\loger\Loger.cpp" />
     <ClCompile Include="BilibiliDownloaders\main.cpp" />
     <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp" />
     <ClCompile Include="BilibiliDownloaders\Test\SimpleNetwork.cpp" />
+    <ClCompile Include="BilibiliDownloaders\VideoList\VideoListWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BilibiliDownloaders\MainWindow\MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="BilibiliDownloaders\MainWindow\MainWindow.ui" />
+    <QtUic Include="BilibiliDownloaders\VideoList\VideoListWidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource\MainWindow.qrc" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.h" />
+    <ClInclude Include="BilibiliDownloaders\AppVersion.h" />
     <ClInclude Include="BilibiliDownloaders\Aria2Net\AriaVersion.h" />
     <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.h" />
     <ClInclude Include="BilibiliDownloaders\Aria2Net\Protocol\Protocol.h" />
+    <ClInclude Include="BilibiliDownloaders\BiliApi\BiliApi.h" />
     <ClInclude Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.h" />
     <ClInclude Include="BilibiliDownloaders\loger\Loger.h" />
     <QtMoc Include="BilibiliDownloaders\Test\SimpleNetwork.h" />
+    <QtMoc Include="BilibiliDownloaders\VideoList\VideoListWidget.h" />
     <ClInclude Include="include\nlohmann\adl_serializer.hpp" />
     <ClInclude Include="include\nlohmann\byte_container_with_subtype.hpp" />
     <ClInclude Include="include\nlohmann\json.hpp" />

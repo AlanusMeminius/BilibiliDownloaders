@@ -20,15 +20,7 @@ FFmpegHelper::FFmpegHelper()
 
 FFmpegHelper::~FFmpegHelper()
 {
-    if (m_pi.hThread != nullptr && m_pi.hThread != INVALID_HANDLE_VALUE)
-    {
-        ::CloseHandle(m_pi.hThread);
-    }
-
-    if (m_pi.hProcess != nullptr && m_pi.hProcess != INVALID_HANDLE_VALUE)
-    {
-        ::CloseHandle(m_pi.hProcess);
-    }
+    // CloseFFmpeg();
 }
 
 bool FFmpegHelper::MegerVideo(const std::string& audio, const std::string& video, const std::string& destionVideo)
@@ -77,10 +69,12 @@ void FFmpegHelper::CloseFFmpeg()
     if (m_pi.hThread != nullptr && m_pi.hThread != INVALID_HANDLE_VALUE)
     {
         ::CloseHandle(m_pi.hThread);
+        m_pi.hThread = nullptr;
     }
 
     if (m_pi.hProcess != nullptr && m_pi.hProcess != INVALID_HANDLE_VALUE)
     {
         ::CloseHandle(m_pi.hProcess);
+        m_pi.hProcess = nullptr;
     }
 }

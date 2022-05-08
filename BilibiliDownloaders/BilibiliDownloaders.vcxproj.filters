@@ -50,6 +50,9 @@
     <Filter Include="Source Files\FFmpeg">
       <UniqueIdentifier>{148d3639-46ed-49d3-98c5-62f843ee5f23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\VideoList">
+      <UniqueIdentifier>{3fa1e496-456b-4c05-ba8a-0527e19df21f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp">
@@ -73,6 +76,12 @@
     <ClCompile Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.cpp">
       <Filter>Source Files\FFmpeg</Filter>
     </ClCompile>
+    <ClCompile Include="BilibiliDownloaders\VideoList\VideoListWidget.cpp">
+      <Filter>Source Files\VideoList</Filter>
+    </ClCompile>
+    <ClCompile Include="BilibiliDownloaders\BiliApi\BiliApi.cpp">
+      <Filter>Source Files\BiliApi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BilibiliDownloaders\MainWindow\MainWindow.h">
@@ -87,10 +96,16 @@
     <QtMoc Include="BilibiliDownloaders\Test\SimpleNetwork.h">
       <Filter>Source Files\Test</Filter>
     </QtMoc>
+    <QtMoc Include="BilibiliDownloaders\VideoList\VideoListWidget.h">
+      <Filter>Source Files\VideoList</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="BilibiliDownloaders\MainWindow\MainWindow.ui">
       <Filter>Source Files\MainWindow</Filter>
+    </QtUic>
+    <QtUic Include="BilibiliDownloaders\VideoList\VideoListWidget.ui">
+      <Filter>Source Files\VideoList</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +188,12 @@
     </ClInclude>
     <ClInclude Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.h">
       <Filter>Source Files\FFmpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="BilibiliDownloaders\AppVersion.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BilibiliDownloaders\BiliApi\BiliApi.h">
+      <Filter>Source Files\BiliApi</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

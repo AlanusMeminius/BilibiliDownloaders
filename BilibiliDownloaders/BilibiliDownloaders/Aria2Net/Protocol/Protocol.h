@@ -35,6 +35,8 @@ void from_json(const nlohmann::json& j, ProtocolType& p) {
     p.SetJson(j);
 }
 
+// 
+
 // 错误协议
 class AriaError : public Protocol
 {
@@ -47,11 +49,14 @@ public:
     void request() override {};
 
     void SetCode(int code) { m_json["code"] = code; }
-    const int GetCode() const { return m_json["code"]; };
+    const int GetCode() const { return m_json["code"]; }
 
     void SetMessage(const std::string& message) { m_json["message"] = message; }
-    const std::string& GetMessage() const { return m_json["message"]; };
+    const std::string& GetMessage() const { return m_json["message"]; }
 };
+
+// Aria2协议文档
+// http://aria2.github.io/manual/en/html/aria2c.html
 
 // Uri协议
 class AriaUri : public Protocol
@@ -67,7 +72,7 @@ public:
     const int GetStatus() const { return m_json["status"]; };
 
     void SetUri(const std::string& message) { m_json["uri"] = message; }
-    const std::string& GetUri() const { return m_json["uri"]; };
+    const std::string& GetUri() const { return m_json["uri"]; }
 };
 
 // 与Aria通信的基本协议
@@ -85,13 +90,13 @@ public:
     const std::string& GetId() const { return m_json["id"]; };
 
     void SetJsonrpc(const std::string& jsonrpc) { m_json["jsonrpc"] = jsonrpc; }
-    const std::string& GetJsonrpc() const { return m_json["jsonrpc"]; };
+    const std::string& GetJsonrpc() const { return m_json["jsonrpc"]; }
 
     void SetResult(const Result& result) { m_json["result"] = result; }
     const Result& GetResult() const { return m_json["result"]; };
 
     void SetError(const AriaError& error) { m_json["error"] = error; }
-    const AriaError& GetError() const { return m_json["error"]; };
+    const AriaError& GetError() const { return m_json["error"]; }
 };
 
 using AriaAddMetalink = AriaBasicJson<std::string>;
@@ -112,22 +117,22 @@ public:
     void request() override {};
 
     void SetCompletedLength(const std::string& id) { m_json["completedLength"] = id; }
-    const std::string& GetcompletedLength() const { return m_json["completedLength"]; };
+    const std::string& GetcompletedLength() const { return m_json["completedLength"]; }
 
     void SetIndex(const std::string& index) { m_json["index"] = index; }
-    const std::string& GetIndex() const { return m_json["index"]; };
+    const std::string& GetIndex() const { return m_json["index"]; }
 
     void SetLength(const std::string& length) { m_json["length"] = length; }
-    const std::string& GetLength() const { return m_json["length"]; };
+    const std::string& GetLength() const { return m_json["length"]; }
 
     void SetPath(const AriaError& path) { m_json["path"] = path; }
-    const AriaError& GetPath() const { return m_json["path"]; };
+    const AriaError& GetPath() const { return m_json["path"]; }
 
     void SetSelected(const AriaError& selected) { m_json["selected"] = selected; }
-    const AriaError& GetSelected() const { return m_json["selected"]; };
+    const AriaError& GetSelected() const { return m_json["selected"]; }
 
     void SetUris(const std::list<AriaUri>& uris) { m_json["uris"] = uris; }
-    const std::list<AriaUri>& GetUris() const { return m_json["uris"]; };
+    const std::list<AriaUri>& GetUris() const { return m_json["uris"]; }
 };
 
 class AriaGetGlobalStatResult : public Protocol
@@ -140,22 +145,22 @@ public:
     void request() override {};
 
     void SetDownloadSpeed(const std::string& downloadSpeed) { m_json["downloadSpeed"] = downloadSpeed; }
-    const std::string& GetDownloadSpeed() const { return m_json["downloadSpeed"]; };
+    const std::string& GetDownloadSpeed() const { return m_json["downloadSpeed"]; }
 
     void SetNumActive(const std::string& numActive) { m_json["numActive"] = numActive; }
-    const std::string& GetNumActive() const { return m_json["numActive"]; };
+    const std::string& GetNumActive() const { return m_json["numActive"]; }
 
     void SetNumStopped(const std::string& numStopped) { m_json["numStopped"] = numStopped; }
-    const std::string& GetNumStopped() const { return m_json["numStopped"]; };
+    const std::string& GetNumStopped() const { return m_json["numStopped"]; }
 
     void SetNumStoppedTotal(const AriaError& numStoppedTotal) { m_json["numStoppedTotal"] = numStoppedTotal; }
-    const AriaError& GetNumStoppedTotal() const { return m_json["numStoppedTotal"]; };
+    const AriaError& GetNumStoppedTotal() const { return m_json["numStoppedTotal"]; }
 
     void SetNumWaiting(const AriaError& numWaiting) { m_json["numWaiting"] = numWaiting; }
-    const AriaError& GetNmWaiting() const { return m_json["numWaiting"]; };
+    const AriaError& GetNmWaiting() const { return m_json["numWaiting"]; }
 
     void SetUploadSpeed(const AriaError& uploadSpeed) { m_json["uploadSpeed"] = uploadSpeed; }
-    const AriaError& GetuUploadSpeed() const { return m_json["uploadSpeed"]; };
+    const AriaError& GetuUploadSpeed() const { return m_json["uploadSpeed"]; }
 
 };
 using AriaGetGlobalStat = AriaBasicJson<AriaGetGlobalStatResult>;
