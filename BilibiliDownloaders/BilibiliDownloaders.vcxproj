@@ -13,18 +13,18 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EA43F4A7-CE86-425F-A66B-BBF4B98B50AF}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.20348.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.20348.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
@@ -60,22 +60,22 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;.\BilibiliDownloaders\Aria2Net\Protocol;.\BilibiliDownloaders\Aria2Net\AriaClient;.\BilibiliDownloaders\Aria2Net\AriaServer;.\BilibiliDownloaders\VideoList;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcurl_imp.lib;avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;swresample.lib;swscale.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)BilibiliDownloaders;.\BilibiliDownloaders\Aria2Net\Protocol;.\BilibiliDownloaders\Aria2Net\AriaClient;.\BilibiliDownloaders\Aria2Net\AriaServer;.\BilibiliDownloaders\VideoList;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcurl_imp.lib;avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;swresample.lib;swscale.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -105,61 +105,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.cpp" />
-    <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.cpp" />
-    <ClCompile Include="BilibiliDownloaders\BiliApi\BiliApi.cpp" />
-    <ClCompile Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.cpp" />
-    <ClCompile Include="BilibiliDownloaders\loger\Loger.cpp" />
-    <ClCompile Include="BilibiliDownloaders\main.cpp" />
-    <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp" />
-    <ClCompile Include="BilibiliDownloaders\Test\SimpleNetwork.cpp" />
-    <ClCompile Include="BilibiliDownloaders\Test\testmain.cpp" />
-    <ClCompile Include="BilibiliDownloaders\VideoList\VideoListWidget.cpp" />
-    <ClCompile Include="UrlProcess.cpp" />
+    <ClCompile Include="src\BiliApi\BiliApi.cpp" />
+    <ClCompile Include="src\BiliApi\WebClient.cpp" />
+    <ClCompile Include="src\ClientUi\MainWindow\MainWindow.cpp" />
+    <ClCompile Include="src\ClientUi\VideoList\VideoListWidget.cpp" />
+    <ClCompile Include="src\FFmpeg\FFmpegHelper.cpp" />
+    <ClCompile Include="src\loger\dump.cpp" />
+    <ClCompile Include="src\loger\Loger.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\NetWork\CNetWork.cpp" />
+    <ClCompile Include="src\Sqlite\SQLiteDatabase.cpp" />
+    <ClCompile Include="src\Test\SimpleNetwork.cpp" />
+    <ClCompile Include="src\Util\UrlProcess.cpp" />
+    <ClCompile Include="src\Aria2Net\AriaClient\AriaClient.cpp" />
+    <ClCompile Include="src\Aria2Net\AriaServer\AriaServer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="BilibiliDownloaders\MainWindow\MainWindow.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtUic Include="BilibiliDownloaders\MainWindow\MainWindow.ui" />
-    <QtUic Include="BilibiliDownloaders\VideoList\VideoListWidget.ui" />
+    <QtUic Include="src\ClientUi\MainWindow\MainWindow.ui" />
+    <QtUic Include="src\ClientUi\VideoList\VideoListWidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource\MainWindow.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UrlProcess.h" />
-    <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.h" />
-    <ClInclude Include="BilibiliDownloaders\AppVersion.h" />
-    <ClInclude Include="BilibiliDownloaders\Aria2Net\AriaVersion.h" />
-    <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.h" />
-    <ClInclude Include="BilibiliDownloaders\Aria2Net\Protocol\Protocol.h" />
-    <ClInclude Include="BilibiliDownloaders\BiliApi\BiliApi.h" />
-    <ClInclude Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.h" />
-    <ClInclude Include="BilibiliDownloaders\loger\Loger.h" />
-    <QtMoc Include="BilibiliDownloaders\Test\SimpleNetwork.h" />
-    <QtMoc Include="BilibiliDownloaders\VideoList\VideoListWidget.h" />
-    <ClInclude Include="include\nlohmann\adl_serializer.hpp" />
-    <ClInclude Include="include\nlohmann\byte_container_with_subtype.hpp" />
-    <ClInclude Include="include\nlohmann\json.hpp" />
-    <ClInclude Include="include\nlohmann\json_fwd.hpp" />
-    <ClInclude Include="include\nlohmann\ordered_map.hpp" />
-    <ClInclude Include="include\spdlog\async.h" />
-    <ClInclude Include="include\spdlog\async_logger-inl.h" />
-    <ClInclude Include="include\spdlog\async_logger.h" />
-    <ClInclude Include="include\spdlog\common-inl.h" />
-    <ClInclude Include="include\spdlog\common.h" />
-    <ClInclude Include="include\spdlog\formatter.h" />
-    <ClInclude Include="include\spdlog\fwd.h" />
-    <ClInclude Include="include\spdlog\logger-inl.h" />
-    <ClInclude Include="include\spdlog\logger.h" />
-    <ClInclude Include="include\spdlog\pattern_formatter-inl.h" />
-    <ClInclude Include="include\spdlog\pattern_formatter.h" />
-    <ClInclude Include="include\spdlog\spdlog-inl.h" />
-    <ClInclude Include="include\spdlog\spdlog.h" />
-    <ClInclude Include="include\spdlog\stopwatch.h" />
-    <ClInclude Include="include\spdlog\tweakme.h" />
-    <ClInclude Include="include\spdlog\version.h" />
+    <ClInclude Include="src\Aria2Net\AriaVersion.h" />
+    <ClInclude Include="src\Aria2Net\Protocol\Protocol.h" />
+    <QtMoc Include="src\Aria2Net\AriaServer\AriaServer.h" />
+    <QtMoc Include="src\Aria2Net\AriaClient\AriaClient.h" />
+    <QtMoc Include="src\BiliApi\WebClient.h" />
+    <QtMoc Include="src\ClientUi\MainWindow\MainWindow.h" />
+    <QtMoc Include="src\ClientUi\VideoList\VideoListWidget.h" />
+    <ClInclude Include="src\FFmpeg\FFmpegLog.h" />
+    <ClInclude Include="src\loger\dump.h" />
+    <ClInclude Include="src\AppVersion.h" />
+    <ClInclude Include="src\BiliApi\BiliApi.h" />
+    <ClInclude Include="src\FFmpeg\FFmpegHelper.h" />
+    <ClInclude Include="src\loger\Loger.h" />
+    <QtMoc Include="src\Test\SimpleNetwork.h" />
+    <QtMoc Include="src\NetWork\CNetWork.h" />
+    <ClInclude Include="src\NetWork\NetworkLog.h" />
+    <ClInclude Include="src\Sqlite\SQLiteDatabase.h" />
+    <ClInclude Include="src\Util\UrlProcess.h" />
   </ItemGroup>
   <ItemGroup>
     <QtTranslation Include="Translation\bilibilidownloaders_zh.ts" />

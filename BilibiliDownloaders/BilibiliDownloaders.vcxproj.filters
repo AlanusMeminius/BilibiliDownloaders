@@ -13,19 +13,6 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
-    <Filter Include="include">
-      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
-      <Extensions>ui</Extensions>
-    </Filter>
-    <Filter Include="Source Files\MainWindow">
-      <UniqueIdentifier>{578fa2bf-3e60-4f37-8d78-df72ae52dca3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include\spdlog">
-      <UniqueIdentifier>{6985571e-d1d1-435b-9d71-2b8d23236393}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include\nlohmann">
-      <UniqueIdentifier>{8a178b54-194a-47e6-bedd-ceb8580f1149}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Loger">
       <UniqueIdentifier>{6aafbc35-14e6-4b11-a5ad-ca5bbcd1fe82}</UniqueIdentifier>
     </Filter>
@@ -50,71 +37,98 @@
     <Filter Include="Source Files\FFmpeg">
       <UniqueIdentifier>{148d3639-46ed-49d3-98c5-62f843ee5f23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\VideoList">
-      <UniqueIdentifier>{3fa1e496-456b-4c05-ba8a-0527e19df21f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{6db8b2a3-abbe-4983-896a-a5de413a8071}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\NetWork">
+      <UniqueIdentifier>{43593963-365d-40c2-adbd-cd18367feb29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sqlite">
+      <UniqueIdentifier>{a07c3536-06dd-4942-a606-36cd09fa93ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ClientUi">
+      <UniqueIdentifier>{c4056138-561f-4deb-b571-e266b43ac04b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ClientUi\MainWindow">
+      <UniqueIdentifier>{578fa2bf-3e60-4f37-8d78-df72ae52dca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ClientUi\VideoList">
+      <UniqueIdentifier>{3fa1e496-456b-4c05-ba8a-0527e19df21f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BilibiliDownloaders\MainWindow\MainWindow.cpp">
-      <Filter>Source Files\MainWindow</Filter>
+    <ClCompile Include="src\Aria2Net\AriaClient\AriaClient.cpp">
+      <Filter>Source Files\Aria2Net\AriaClient</Filter>
     </ClCompile>
-    <ClCompile Include="BilibiliDownloaders\main.cpp">
+    <ClCompile Include="src\Aria2Net\AriaServer\AriaServer.cpp">
+      <Filter>Source Files\Aria2Net\AriaServer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BilibiliDownloaders\loger\Loger.cpp">
-      <Filter>Source Files\Loger</Filter>
-    </ClCompile>
-    <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.cpp">
-      <Filter>Source Files\Aria2Net\AriaClient</Filter>
-    </ClCompile>
-    <ClCompile Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.cpp">
-      <Filter>Source Files\Aria2Net\AriaServer</Filter>
-    </ClCompile>
-    <ClCompile Include="BilibiliDownloaders\Test\SimpleNetwork.cpp">
-      <Filter>Source Files\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.cpp">
-      <Filter>Source Files\FFmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="BilibiliDownloaders\VideoList\VideoListWidget.cpp">
-      <Filter>Source Files\VideoList</Filter>
-    </ClCompile>
-    <ClCompile Include="BilibiliDownloaders\BiliApi\BiliApi.cpp">
+    <ClCompile Include="src\BiliApi\BiliApi.cpp">
       <Filter>Source Files\BiliApi</Filter>
     </ClCompile>
-    <ClCompile Include="BilibiliDownloaders\Test\testmain.cpp">
-      <Filter>Source Files\Test</Filter>
+    <ClCompile Include="src\loger\dump.cpp">
+      <Filter>Source Files\Loger</Filter>
     </ClCompile>
-    <ClCompile Include="UrlProcess.cpp">
+    <ClCompile Include="src\loger\Loger.cpp">
+      <Filter>Source Files\Loger</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FFmpeg\FFmpegHelper.cpp">
+      <Filter>Source Files\FFmpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NetWork\CNetWork.cpp">
+      <Filter>Source Files\NetWork</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sqlite\SQLiteDatabase.cpp">
+      <Filter>Source Files\Sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Util\UrlProcess.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
+    <ClCompile Include="src\Test\SimpleNetwork.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientUi\MainWindow\MainWindow.cpp">
+      <Filter>Source Files\ClientUi\MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientUi\VideoList\VideoListWidget.cpp">
+      <Filter>Source Files\ClientUi\VideoList</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BiliApi\WebClient.cpp">
+      <Filter>Source Files\BiliApi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="BilibiliDownloaders\MainWindow\MainWindow.h">
-      <Filter>Source Files\MainWindow</Filter>
-    </QtMoc>
-    <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaClient\AriaClient.h">
+    <QtMoc Include="src\Aria2Net\AriaClient\AriaClient.h">
       <Filter>Source Files\Aria2Net\AriaClient</Filter>
     </QtMoc>
-    <QtMoc Include="BilibiliDownloaders\Aria2Net\AriaServer\AriaServer.h">
+    <QtMoc Include="src\Aria2Net\AriaServer\AriaServer.h">
       <Filter>Source Files\Aria2Net\AriaServer</Filter>
     </QtMoc>
-    <QtMoc Include="BilibiliDownloaders\Test\SimpleNetwork.h">
+    <QtMoc Include="src\NetWork\CNetWork.h">
+      <Filter>Source Files\NetWork</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Test\SimpleNetwork.h">
       <Filter>Source Files\Test</Filter>
     </QtMoc>
-    <QtMoc Include="BilibiliDownloaders\VideoList\VideoListWidget.h">
-      <Filter>Source Files\VideoList</Filter>
+    <QtMoc Include="src\ClientUi\MainWindow\MainWindow.h">
+      <Filter>Source Files\ClientUi\MainWindow</Filter>
+    </QtMoc>
+    <QtMoc Include="src\BiliApi\WebClient.h">
+      <Filter>Source Files\BiliApi</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ClientUi\VideoList\VideoListWidget.h">
+      <Filter>Source Files\ClientUi\VideoList</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="BilibiliDownloaders\MainWindow\MainWindow.ui">
-      <Filter>Source Files\MainWindow</Filter>
+    <QtUic Include="src\ClientUi\MainWindow\MainWindow.ui">
+      <Filter>Source Files\ClientUi\MainWindow</Filter>
     </QtUic>
-    <QtUic Include="BilibiliDownloaders\VideoList\VideoListWidget.ui">
-      <Filter>Source Files\VideoList</Filter>
+    <QtUic Include="src\ClientUi\VideoList\VideoListWidget.ui">
+      <Filter>Source Files\ClientUi\VideoList</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
@@ -123,93 +137,42 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\nlohmann\adl_serializer.hpp">
-      <Filter>include\nlohmann</Filter>
-    </ClInclude>
-    <ClInclude Include="include\nlohmann\byte_container_with_subtype.hpp">
-      <Filter>include\nlohmann</Filter>
-    </ClInclude>
-    <ClInclude Include="include\nlohmann\json.hpp">
-      <Filter>include\nlohmann</Filter>
-    </ClInclude>
-    <ClInclude Include="include\nlohmann\json_fwd.hpp">
-      <Filter>include\nlohmann</Filter>
-    </ClInclude>
-    <ClInclude Include="include\nlohmann\ordered_map.hpp">
-      <Filter>include\nlohmann</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\async.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\async_logger.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\async_logger-inl.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\common.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\common-inl.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\formatter.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\fwd.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\logger.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\logger-inl.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\pattern_formatter.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\pattern_formatter-inl.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\spdlog.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\spdlog-inl.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\stopwatch.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\tweakme.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="include\spdlog\version.h">
-      <Filter>include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="BilibiliDownloaders\loger\Loger.h">
-      <Filter>Source Files\Loger</Filter>
-    </ClInclude>
-    <ClInclude Include="BilibiliDownloaders\Aria2Net\Protocol\Protocol.h">
+    <ClInclude Include="src\Aria2Net\Protocol\Protocol.h">
       <Filter>Source Files\Aria2Net\Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="BilibiliDownloaders\Aria2Net\AriaVersion.h">
+    <ClInclude Include="src\Aria2Net\AriaVersion.h">
       <Filter>Source Files\Aria2Net</Filter>
     </ClInclude>
-    <ClInclude Include="BilibiliDownloaders\FFmpeg\FFmpegHelper.h">
-      <Filter>Source Files\FFmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="BilibiliDownloaders\AppVersion.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BilibiliDownloaders\BiliApi\BiliApi.h">
+    <ClInclude Include="src\BiliApi\BiliApi.h">
       <Filter>Source Files\BiliApi</Filter>
     </ClInclude>
-    <ClInclude Include="UrlProcess.h">
+    <ClInclude Include="src\loger\dump.h">
+      <Filter>Source Files\Loger</Filter>
+    </ClInclude>
+    <ClInclude Include="src\loger\Loger.h">
+      <Filter>Source Files\Loger</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FFmpeg\FFmpegHelper.h">
+      <Filter>Source Files\FFmpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sqlite\SQLiteDatabase.h">
+      <Filter>Source Files\Sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util\UrlProcess.h">
       <Filter>Source Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NetWork\NetworkLog.h">
+      <Filter>Source Files\NetWork</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AppVersion.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FFmpeg\FFmpegLog.h">
+      <Filter>Source Files\FFmpeg</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtTranslation Include="Translation\bilibilidownloaders_zh.ts">
+    <QtTranslation Include="Translation\BilibiliDownloaders_zh.ts">
       <Filter>Translation Files</Filter>
     </QtTranslation>
   </ItemGroup>
