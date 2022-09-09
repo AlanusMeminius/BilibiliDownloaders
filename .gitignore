@@ -366,5 +366,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #build Result Can't be ignored
-!x86/
-!x64/
+!/x86/Debug/
+!/x64/Debug/
+!/x86/Release/
+!/x64/Release/
