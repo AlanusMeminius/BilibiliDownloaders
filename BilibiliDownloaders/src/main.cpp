@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
     sendDate.SetParams(strParams);
 
     aria2net::AriaClient ariaClient;
-    ariaClient.Request(sendDate.toString());
+    ariaClient.Request(aria2net::GetRpcUri(), sendDate.toString());
 
 
     MainWindow w;

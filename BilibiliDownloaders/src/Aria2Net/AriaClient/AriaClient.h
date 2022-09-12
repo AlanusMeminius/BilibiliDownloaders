@@ -2,61 +2,59 @@
 #pragma execution_character_set("utf-8")
 
 #include <QObject>
-#include <QNetworkAccessManager>
-#include <QEventLoop>
-#include <QThread>
 
-class QDataStream;
+#include <nlohmann/json.hpp>
+
+#include "NetWork/CNetWork.h"
+#include "Aria2Net/Protocol/Protocol.h"
 
 namespace aria2net
 {
+const std::string GetRpcUri(int listenPort = 6800);
 
-class AriaClient : public QThread
+class AriaClient : public QObject
 {
     Q_OBJECT
+
+    using ListString = std::list<std::string>;
+public:
+    AriaClient(QObject* parent = nullptr);
+    ~AriaClient();
+
+    SystemListNotifications listNotificationsAsync();
+    SystemListMethods ListMethodsAsync();
+    std::list<SystemMulticall> MulticallAsync(const std::list<SystemMulticallMathod>& systemMulticallMathods);
+    AriaSaveSession SaveSessionAsync();
+    AriaShutdown ForceShutdownAsync();
+    AriaShutdown ShutdownAsync();
+    AriaGetSessionInfo GetSessionInfoAsync();
+    AriaVersion GetAriaVersionAsync();
+    AriaRemove RemoveDownloadResultAsync(const std::string& gid);
+    AriaRemove PurgeDownloadResultAsync();
+    AriaGetGlobalStat GetGlobalStatAsync();
+    AriaChangeOption ChangeGlobalOptionAsync(const ListString& option);
+    AriaGetOption GetGlobalOptionAsync();
+    AriaChangeOption ChangeOptionAsync(const std::string& gid, const ListString& option);
+
+
 private:
     static constexpr char JSONRPC[] = "2.0";
     static constexpr char TOKEN[] = "downkyi";
 
+    template<typename Result>
+    Result GetResult(const AriaSendData& sendData);
+
 public:
-    enum ResponseType
-    {
-        Async,
-        Sync
-    };
-
-    AriaClient(QObject* parent = nullptr);
-    ~AriaClient();
-
-    QByteArray Request(const QString& url, const QString& parameters, int retry = 3, ResponseType responseType = Sync);
-    inline QByteArray Request(const std::string& url, const std::string& parameters, int retry = 3, ResponseType responseType = Sync)
-    {
-        return Request(QString::fromLocal8Bit(url.data()), QString::fromLocal8Bit(parameters.data()), retry, responseType);
-    }
-
-    QByteArray Request(const std::string& parameters, int retry = 3);
-
-    QByteArray RequestAsync(const QString& url, const QString& parameters, int retry = 3);
-    inline QByteArray RequestAsync(const std::string& url, const std::string& parameters, int retry = 3)
-    {
-        return RequestAsync(QString::fromLocal8Bit(url.data()), QString::fromLocal8Bit(parameters.data()), retry);
-    }
-
-    QByteArray RequestSync(const QString& url, const QString& parameters, int retry = 3);
-    inline QByteArray RequestSync(const std::string& url, const std::string& parameters, int retry = 3)
-    {
-        return RequestSync(QString::fromLocal8Bit(url.data()), QString::fromLocal8Bit(parameters.data()), retry);
-    }
-
-    
-    static QByteArray Response(QNetworkReply* reply);
-
-    void SetDataStream(QDataStream& dataStream);
-
-protected:
-    void run() override;
-    QNetworkAccessManager* m_syncNetworkAccessManager;
-    QNetworkAccessManager* m_asyncNetworkAccessManager;
+    std::string Request(const std::string& url, const std::string& params);
 };
+
+template<typename Result>
+inline Result AriaClient::GetResult(const AriaSendData& sendData)
+{
+    std::string strParams = sendData.toString();
+    std::string strResponse = Request(GetRpcUri(), strParams);
+    nlohmann::json result = nlohmann::json::parse(strResponse);
+    return Result(result);
+}
 
 } // namespace aria2net

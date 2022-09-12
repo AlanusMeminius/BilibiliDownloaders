@@ -13,7 +13,7 @@ public:
     Protocol() = default;
     Protocol(nlohmann::json json) : m_json(std::move(json)) {}
     virtual ~Protocol() = default;
-    virtual const std::string toString() { return m_json.dump(); };
+    virtual const std::string toString() const { return m_json.dump(); };
     virtual void request() {};
 
     void SetJson(const nlohmann::json& json) { m_json = json; }

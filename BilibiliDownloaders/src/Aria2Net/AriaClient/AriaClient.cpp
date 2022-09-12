@@ -1,148 +1,248 @@
+#include <QUuid>
+
 #include "AriaClient.h"
-
-#include <QNetWorkAccessManager>
-#include <QNetworkReply>
-#include <QUrl>
-#include <QFile>
-
-#include <chrono>
-#include <thread>
-#include <future>
-
-#include <nlohmann/json.hpp>
-
 #include "loger/Loger.h"
 
 namespace aria2net
 {
 
-const QString GetRpcUri(int listenPort = 6800)
+const std::string GetRpcUri(int listenPort)
 {
-    return QString("http://localhost:%1/jsonrpc").arg(listenPort);
+    return QString("http://localhost:%1/jsonrpc").arg(listenPort).toStdString();
 }
 
-} // namespace aria2net
 
+AriaClient::AriaClient(QObject *parent)
+    : QObject(parent)
 
-
-aria2net::AriaClient::AriaClient(QObject *parent)
-    : QThread(parent)
-    , m_syncNetworkAccessManager(new QNetworkAccessManager(this))
-    , m_asyncNetworkAccessManager(nullptr)
 {
-    start();
+
 }
 
-aria2net::AriaClient::~AriaClient()
+AriaClient::~AriaClient()
 {
-    quit();
-    wait();
 }
 
-QByteArray aria2net::AriaClient::Request(const QString& url, const QString& parameters, int retry, ResponseType responseType)
+SystemListNotifications AriaClient::listNotificationsAsync()
 {
-    QByteArray result;
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("system.listNotifications");
 
-    switch (responseType)
+    return GetResult<SystemListNotifications>(ariaSend);
+}
+
+SystemListMethods AriaClient::ListMethodsAsync()
+{
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("system.listMethods");
+
+    return GetResult<SystemListMethods>(ariaSend);
+}
+
+std::list<SystemMulticall> AriaClient::MulticallAsync(const std::list<SystemMulticallMathod>& systemMulticallMathods)
+{
+    std::list<std::string> listMethod;
+    for (const auto method : systemMulticallMathods)
     {
-    case aria2net::AriaClient::Async:
-        RequestAsync(url, parameters, retry);
-        break;
-    case aria2net::AriaClient::Sync:
-        result = RequestSync(url, parameters, retry);
-        break;
-    default:
-        break;
+        listMethod.emplace_back(method.toString());
+    }
+
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("system.multicall");
+    ariaSend.SetParams(listMethod);
+
+    nlohmann::json jsonResult = GetResult<nlohmann::json>(ariaSend);
+    std::list<SystemMulticall> result;
+    for (const auto& sigleJson : jsonResult)
+    {
+        result.emplace_back(sigleJson);
     }
 
     return result;
 }
 
-QByteArray aria2net::AriaClient::RequestAsync(const QString& url, const QString& parameters, int retry)
+AriaSaveSession AriaClient::SaveSessionAsync()
 {
-    QByteArray sendData = parameters.toLocal8Bit();
-    QNetworkRequest request(url);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setHeader(QNetworkRequest::ContentLengthHeader, sendData.size());
+    ListString listString;
+    listString.emplace_back(std::string("token:") + TOKEN);
 
-    QNetworkReply* reply = m_asyncNetworkAccessManager->post(request, sendData);
-
-    return QByteArray();
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.saveSession");
+    ariaSend.SetParams(listString);
+    return GetResult<AriaSaveSession>(ariaSend);
 }
 
-QByteArray aria2net::AriaClient::RequestSync(const QString& url, const QString& parameters, int retry)
+AriaShutdown AriaClient::ForceShutdownAsync()
 {
-    QByteArray sendData = parameters.toLocal8Bit();
-    QNetworkRequest request(url);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setHeader(QNetworkRequest::ContentLengthHeader, sendData.size());
+    ListString listString;
+    listString.emplace_back(std::string("token:") + TOKEN);
 
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.forceShutdown");
+    ariaSend.SetParams(listString);
 
-    QNetworkReply* reply = m_syncNetworkAccessManager->post(request, sendData);
-
-    QEventLoop eventLoop;
-    connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
-    eventLoop.exec(QEventLoop::ExcludeUserInputEvents);      // ×èÈûÇëÇó
-
-    return Response(reply);
+    return GetResult<AriaShutdown>(ariaSend);
 }
 
-QByteArray aria2net::AriaClient::Request(const std::string& parameters, int retry)
+AriaShutdown AriaClient::ShutdownAsync()
 {
-    QString str = "{\
-        \"id\": \"A3F386833D5B45D1B2CD706D3123C5C1\",\
-        \"jsonrpc\" : \"2.0\",\
-        \"method\" : \"aria2.addUri\",\
-        \"params\" : [\
-            \"token:downkyi\",\
-            [\
-                \"https://upos-sz-mirrorhw.bilivideo.com/upgcxcode/64/57/549595764/549595764_nb2-1-30280.m4s?e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&nbs=1&deadline=1649000446&gen=playurlv2&os=hwbv&oi=0&trid=3b0d12bdd7fa49dcbac36ad281d165e0u&platform=pc&upsig=5bdd320c18cab730053c38b7d977458f&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&mid=287031869&bvc=vod&nettype=0&orderid=0,2&agrr=0&bw=39911&logo=80000000\",\
-                \"https://upos-sz-mirrorhwb.bilivideo.com/upgcxcode/64/57/549595764/549595764_nb2-1-30280.m4s?e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&nbs=1&deadline=1649000446&gen=playurlv2&os=hwbbv&oi=0&trid=3b0d12bdd7fa49dcbac36ad281d165e0u&platform=pc&upsig=f821180ee16ae4a407ec278fadec361b&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&mid=287031869&bvc=vod&nettype=0&orderid=1,2&agrr=0&bw=39911&logo=40000000\"\
-            ],\
-            {\
-              \"out\": \"qq.exe\",\
-              \"dir\" : \"D:/workfile/BilibiliDownloaders/x64/Debug\"\
-            }\
-        ]\
-    }";
-    return Request(GetRpcUri(), str/*QString::fromLocal8Bit(parameters.data())*/, retry);
+    ListString listString;
+    listString.emplace_back(std::string("token:") + TOKEN);
+
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.shutdown");
+    ariaSend.SetParams(listString);
+
+    return GetResult<AriaShutdown>(ariaSend);
 }
 
-QByteArray aria2net::AriaClient::Response(QNetworkReply* reply)
+AriaGetSessionInfo AriaClient::GetSessionInfoAsync()
 {
-    
-    if (reply == nullptr)
-    {
-        return QByteArray();
-    }
-    if (reply->error() == QNetworkReply::OperationCanceledError) 
-    {
-        reply->abort();
-        return QByteArray();
-    }
-    if (reply->error() != QNetworkReply::NoError) 
-    {
-        return QByteArray();
-    }
+    ListString listString;
+    listString.emplace_back(std::string("token:") + TOKEN);
 
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.getSessionInfo");
+    ariaSend.SetParams(listString);
 
-
-    QByteArray rep = reply->readAll();
-
-    reply->deleteLater();
-    reply = nullptr;
-
-    return rep;
+    return GetResult<AriaGetSessionInfo>(ariaSend);
 }
 
-void aria2net::AriaClient::SetDataStream(QDataStream& dataStream)
+AriaVersion AriaClient::GetAriaVersionAsync()
 {
-    //m_asyncDataStream = dataStream;
+    ListString listString;
+    listString.emplace_back(std::string("token:") + TOKEN);
+
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.getVersion");
+    ariaSend.SetParams(listString);
+
+    return GetResult<AriaVersion>(ariaSend);
 }
 
-void aria2net::AriaClient::run()
+AriaRemove AriaClient::RemoveDownloadResultAsync(const std::string& gid)
 {
-    m_asyncNetworkAccessManager = new QNetworkAccessManager(this);
-    connect(m_asyncNetworkAccessManager, &QNetworkAccessManager::finished, this, &AriaClient::Response);
-    exec();
+    ListString listString;
+    listString.emplace_back(std::string("token:") + TOKEN);
+    listString.emplace_back(gid);
+
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.removeDownloadResult");
+    ariaSend.SetParams(listString);
+
+    return GetResult<AriaRemove>(ariaSend);
 }
+
+AriaRemove AriaClient::PurgeDownloadResultAsync()
+{
+    ListString listString;
+    listString.emplace_back(std::string("token:") + TOKEN);
+
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.purgeDownloadResult");
+    ariaSend.SetParams(listString);
+
+    return GetResult<AriaRemove>(ariaSend);
+}
+
+AriaGetGlobalStat AriaClient::GetGlobalStatAsync()
+{
+    ListString listString;
+    listString.emplace_back(std::string("token:") + TOKEN);
+
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.getGlobalStat");
+    ariaSend.SetParams(listString);
+
+    return GetResult<AriaGetGlobalStat>(ariaSend);
+}
+
+AriaChangeOption AriaClient::ChangeGlobalOptionAsync(const ListString& option)
+{
+    ListString listString;
+    listString.emplace_back(std::string("token:") + TOKEN);
+    listString.insert(listString.end(), option.begin(), option.end());
+
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.getGlobalStat");
+    ariaSend.SetParams(listString);
+
+    return GetResult<AriaChangeOption>(ariaSend);
+}
+
+AriaGetOption AriaClient::GetGlobalOptionAsync()
+{
+    ListString listString;
+    listString.emplace_back(std::string("token:") + TOKEN);
+
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.getGlobalOption");
+    ariaSend.SetParams(listString);
+
+    return GetResult<AriaGetOption>(ariaSend);
+}
+
+AriaChangeOption AriaClient::ChangeOptionAsync(const std::string& gid, const ListString& option)
+{
+    ListString listString;
+    listString.emplace_back(std::string("token:") + TOKEN);
+    listString.emplace_back(gid);
+    listString.insert(listString.end(), option.begin(), option.end());
+
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(id.toString().toStdString());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.getGlobalStat");
+    ariaSend.SetParams(listString);
+
+    return GetResult<AriaChangeOption>(ariaSend);
+}
+
+std::string AriaClient::Request(const std::string& url, const std::string& param)
+{
+    std::string strResponse;
+    CNetWork::GetInstance().HttpPost(url, param, strResponse);
+    return strResponse;
+}
+
+} // namespace aria2net

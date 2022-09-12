@@ -6,7 +6,7 @@
 
 namespace
 {
-    constexpr int logFileMaxSize = 20 * 1024 * 1024;
+    constexpr int logFileMaxSize = 20 * 1024 * 1024; // 20M
 }
 
 Logger& Logger::GetInstance()

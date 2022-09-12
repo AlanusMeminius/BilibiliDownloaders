@@ -57,7 +57,7 @@ int GenerateMiniDump(PEXCEPTION_POINTERS pExceptionPointers)
         return EXCEPTION_CONTINUE_EXECUTION;
     }
 
-    // 写入 dmp 文件
+    // 写入 dump 文件
     MINIDUMP_EXCEPTION_INFORMATION expParam;
     expParam.ThreadId = ::GetCurrentThreadId();
     expParam.ExceptionPointers = pExceptionPointers;
