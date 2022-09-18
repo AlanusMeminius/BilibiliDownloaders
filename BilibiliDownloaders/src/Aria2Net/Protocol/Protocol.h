@@ -18,6 +18,7 @@ public:
 
     void SetJson(const nlohmann::json& json) { m_json = json; }
     const nlohmann::json& GetJson() const { return m_json; }
+    nlohmann::json& GetJson() { return m_json; }
 
 protected:
     nlohmann::json m_json;
@@ -559,6 +560,7 @@ public:
     const std::string& GetMethod() const { return m_json["method"]; }
 
     void SetParams(const std::list<std::string>& params) { m_json["params"] = params; }
+    void SetParams(const nlohmann::json& params) { m_json["params"] = params; }
     const std::list<std::string>& GetParams() const { return m_json["params"]; }
 };
 

@@ -18,7 +18,8 @@ Logger& Logger::GetInstance()
 void Logger::InitLog()
 {
     RegisterLogger("Network");
-    RegisterLogger("Aria2");
+    RegisterLogger("Aria");
+    RegisterLogger("FFmpeg");
 }
 
 Logger::Logger()

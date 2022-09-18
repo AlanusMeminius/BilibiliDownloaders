@@ -21,6 +21,7 @@ public:
     ~AriaServer();
     void StartServerAsync();
     void CloseServer();
+    void ForceCloseServer();
 
     PROCESS_INFORMATION m_pi;
 };

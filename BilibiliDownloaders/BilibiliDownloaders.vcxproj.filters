@@ -170,6 +170,9 @@
     <ClInclude Include="src\FFmpeg\FFmpegLog.h">
       <Filter>Source Files\FFmpeg</Filter>
     </ClInclude>
+    <ClInclude Include="src\Aria2Net\AriaLog.h">
+      <Filter>Source Files\Aria2Net</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtTranslation Include="Translation\BilibiliDownloaders_zh.ts">

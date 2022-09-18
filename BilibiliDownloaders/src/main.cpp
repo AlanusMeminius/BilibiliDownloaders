@@ -19,6 +19,7 @@
 #include <QNetworkAccessManager>
 #include <QFile>
 #include <QDir>
+#include <QUuid>
 
 std::string gb2312_to_utf8(std::string const& strGb2312)
 {
@@ -43,25 +44,6 @@ std::string gb2312_to_utf8(std::string const& strGb2312)
     return "";
 }
 
-namespace {
-    std::string GenerateGuid()
-    {
-        GUID guid;
-        CoCreateGuid(&guid);
-        char cBuffer[64] = { 0 };
-        sprintf_s(cBuffer, sizeof(cBuffer),
-            "%08X%04X%04X%02X%02X%02X%02X%02X%02X%02X%02X",
-            guid.Data1, guid.Data2,
-            guid.Data3, guid.Data4[0],
-            guid.Data4[1], guid.Data4[2],
-            guid.Data4[3], guid.Data4[4],
-            guid.Data4[5], guid.Data4[6],
-            guid.Data4[7]);
-
-        return std::string(cBuffer);
-    }
-}
-
 #include<iostream>
 #include<string>
 #include<curl\curl.h>
@@ -75,12 +57,12 @@ int main(int argc, char *argv[])
     
     Logger::GetInstance();
 
-    NetWork_LOG_TRACE("trace");
-    NetWork_LOG_DEBUG("debug");
-    NetWork_LOG_INFO("info");
-    NetWork_LOG_ERROR("error");
-    NetWork_LOG_WARN("warn");
-    NetWork_LOG_CRITICAL("critical");
+    NETWORK_LOG_TRACE("trace");
+    NETWORK_LOG_DEBUG("debug");
+    NETWORK_LOG_INFO("info");
+    NETWORK_LOG_ERROR("error");
+    NETWORK_LOG_WARN("warn");
+    NETWORK_LOG_CRITICAL("critical");
 
     aria2net::AriaServer AriaServer;
     const std::string url = "https://www.bilibili.com/video/BV1CT411V79S?spm_id_from=333.999.0.0";
@@ -140,22 +122,19 @@ int main(int argc, char *argv[])
     ariaSendOption.SetDir(dirPath.toStdString());
     ariaSendOption.SetOut("download.mp4");
 
-    nlohmann::json params = urls;
-    std::list<std::string> strParams;
-    strParams.emplace_back("token:downkyi");
-    strParams.emplace_back(params.dump());
-    strParams.emplace_back(ariaSendOption.toString());
 
-
-    aria2net::AriaSendData sendDate;
-    std::string id = GenerateGuid();
-    sendDate.SetId(GenerateGuid());
-    sendDate.SetMethod("aria2.addUri");
-    sendDate.SetJsonrpc("2.0");
-    sendDate.SetParams(strParams);
 
     aria2net::AriaClient ariaClient;
-    ariaClient.Request(aria2net::GetRpcUri(), sendDate.toString());
+    ariaClient.AddUriAsync(urls, ariaSendOption);
+
+    std::list<std::string> url21 = {
+        "http://i1.hdslb.com/bfs/storyff/n220911a23aymuwfy5s6nituxlijfls4_firsti.jpg",
+    };
+
+    aria2net::AriaSendOption ariaSendOption1;
+    ariaSendOption1.SetDir(dirPath.toStdString());
+    ariaSendOption1.SetOut("cover1.jpg");
+    ariaClient.AddUriAsync(url21, ariaSendOption1);
 
 
     MainWindow w;

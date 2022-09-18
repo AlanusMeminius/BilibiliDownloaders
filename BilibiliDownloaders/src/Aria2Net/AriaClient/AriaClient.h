@@ -11,6 +11,7 @@
 namespace aria2net
 {
 const std::string GetRpcUri(int listenPort = 6800);
+const std::string GetGuid();
 
 class AriaClient : public QObject
 {
@@ -18,6 +19,13 @@ class AriaClient : public QObject
 
     using ListString = std::list<std::string>;
 public:
+    enum HowChangePosition
+    {
+        POS_SET = 1,
+        POS_CUR,
+        POS_END
+    };
+
     AriaClient(QObject* parent = nullptr);
     ~AriaClient();
 
@@ -33,8 +41,13 @@ public:
     AriaRemove PurgeDownloadResultAsync();
     AriaGetGlobalStat GetGlobalStatAsync();
     AriaChangeOption ChangeGlobalOptionAsync(const ListString& option);
-    AriaGetOption GetGlobalOptionAsync();
     AriaChangeOption ChangeOptionAsync(const std::string& gid, const ListString& option);
+    AriaGetOption GetGlobalOptionAsync();
+    AriaGetOption GetOptionAsync(const std::string& gid);
+    AriaChangeUri ChangeUriAsync(const std::string& gid, int fileIndex, ListString delUris, ListString addUris, int position = -1);
+    AriaChangePosition ChangePositionAsync(const std::string& gid, int pos, HowChangePosition how);
+    //AriaTellStatusList TellStoppedAsync(int offset, int num);
+    AriaAddUri AddUriAsync(ListString uris, AriaSendOption option, int position = -1);
 
 
 private:
