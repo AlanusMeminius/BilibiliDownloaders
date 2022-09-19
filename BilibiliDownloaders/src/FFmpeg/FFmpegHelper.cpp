@@ -37,9 +37,9 @@ void FFmpegHelper::StartFFpmegAsync(const std::string& audio, const std::string&
         ZeroMemory(&si, sizeof(si));
         si.cb = sizeof(si);
         QString ffmpegExeFilename;
-        ffmpegExeFilename = QApplication::applicationDirPath() + "/ffmpeg.exe";
+        ffmpegExeFilename = QApplication::applicationDirPath() + "/ffmpeg.exe ";
         QString ffmpegArg(ffmpegCommand);
-        ffmpegArg = ffmpegArg.arg(audio.c_str()).arg(video.c_str()).arg(destionVideo.c_str());
+        ffmpegArg = ffmpegExeFilename + ffmpegArg.arg(audio.c_str()).arg(video.c_str()).arg(destionVideo.c_str());
         qDebug() << ffmpegArg;
 
         // 创建子进程，并判断是否成功

@@ -298,7 +298,7 @@ AriaAddUri AriaClient::AddUriAsync(ListString uris, AriaSendOption option, int p
     ariaSend.SetMethod("aria2.addUri");
     ariaSend.SetParams(params);
 
-    return GetResult<AriaChangePosition>(ariaSend);
+    return GetResult<AriaAddUri>(ariaSend);
 }
 
 AriaChangeOption AriaClient::ChangeOptionAsync(const std::string& gid, const ListString& option)

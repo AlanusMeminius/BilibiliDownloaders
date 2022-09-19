@@ -13,6 +13,7 @@
 #include "NetWork/CNetWork.h"
 #include "Aria2Net/Protocol/Protocol.h"
 #include "NetWork/NetworkLog.h"
+#include "FFmpeg/FFmpegHelper.h"
 
 #include <QNetWorkReply>
 #include <QNetWorkRequest>
@@ -111,21 +112,29 @@ int main(int argc, char *argv[])
         dir.mkpath(dirPath);
     }
 
-    std::list<std::string> urls;
+    std::list<std::string> video_urls;
+    std::list<std::string> audio_urls;
     auto videos = playUrl.GetDash().GetVideo();
     for (const auto& video : videos)
     {
-        urls.push_back(video.GetBaseUrl());
+        video_urls.push_back(video.GetBaseUrl());
+    }
+    auto audioes = playUrl.GetDash().GetAudio();
+    for (const auto& audio : audioes)
+    {
+        audio_urls.push_back(audio.GetBaseUrl());
     }
 
     aria2net::AriaSendOption ariaSendOption;
     ariaSendOption.SetDir(dirPath.toStdString());
-    ariaSendOption.SetOut("download.mp4");
+    ariaSendOption.SetOut("video.mp4");
 
 
 
     aria2net::AriaClient ariaClient;
-    ariaClient.AddUriAsync(urls, ariaSendOption);
+    ariaClient.AddUriAsync(video_urls, ariaSendOption);
+    ariaSendOption.SetOut("audio.mp4");
+    ariaClient.AddUriAsync(audio_urls, ariaSendOption);
 
     std::list<std::string> url21 = {
         "http://i1.hdslb.com/bfs/storyff/n220911a23aymuwfy5s6nituxlijfls4_firsti.jpg",
@@ -136,6 +145,9 @@ int main(int argc, char *argv[])
     ariaSendOption1.SetOut("cover1.jpg");
     ariaClient.AddUriAsync(url21, ariaSendOption1);
 
+    std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+
+    FFmpegHelper::MegerVideo(dirPath.toStdString() + "/audio.mp4", dirPath.toStdString() + "/video.mp4", dirPath.toStdString() + "/all.mp4");
 
     MainWindow w;
     w.show();
