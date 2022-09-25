@@ -1,5 +1,4 @@
 #pragma once
-#pragma execution_character_set("utf-8")
 
 #include <string>
 
@@ -19,13 +18,16 @@ public:
         PUT,
     };
 
-public:
     using ParamType = std::unordered_map<std::string, std::string>;
-    static CNetWork& GetInstance();
+
+public:
+    CNetWork();
+    ~CNetWork();
 
     void HttpGet(const std::string& url, ParamType params, std::string& response);
     void HttpGet(const std::string& url, const std::string& params, std::string& response);
     void HttpGet(const std::string& url, std::string& response);
+
     void HttpPost(const std::string& url, ParamType params, std::string& response);
     void HttpPost(const std::string& url, const std::string& params, std::string& response);
     void HttpPost(const std::string& url, std::string& response);
@@ -33,20 +35,23 @@ public:
     void HttpPut(const std::string& url, ParamType params, std::string& response);
     void HttpPut(const std::string& url, std::string& response);
 
+    void SetHeaders(curl_slist* headers);
+    void AppendHeaders(curl_slist* headers);
+    void AppendHeaders(const std::string& header);
+
 private:
-    CNetWork();
-    ~CNetWork();
-
-    CNetWork(const CNetWork& other) = delete;
-    CNetWork& operator=(const CNetWork& other) = delete;
-
-    CNetWork(CNetWork&& other) = delete;
-    CNetWork& operator=(CNetWork&& other) = delete;
-
-    void InitHeaders();
+    void InitDefaultHeaders();
 
 private:
     curl_slist* m_headers; // «Î«ÛÕ∑
+    class CurlHelp
+    {
+    public:
+        CurlHelp();
+        ~CurlHelp();
+    };
+
+    static CurlHelp m_curlHelp;
 };
 
 class AriaClient : public QThread

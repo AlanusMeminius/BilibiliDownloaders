@@ -1,11 +1,14 @@
 #include "VideoListWidget.h"
 #include "ui_VideoListWidget.h"
 
-VideoListItemWidget::VideoListItemWidget(QWidget* parent)
+VideoListItemWidget::VideoListItemWidget(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::VideoListItemWidget)
+    , ui(new Ui::VideoListItemWidget())
 {
     ui->setupUi(this);
+    SetUi();
+
+    SignalsAndSlots();
 }
 
 VideoListItemWidget::~VideoListItemWidget()
@@ -13,14 +16,18 @@ VideoListItemWidget::~VideoListItemWidget()
     delete ui;
 }
 
-
-VideoListWidget::VideoListWidget(QWidget *parent)
-    : QListWidget(parent)
+void VideoListItemWidget::SetUi()
 {
+}
 
+void VideoListItemWidget::SignalsAndSlots()
+{
+}
+
+VideoListWidget::VideoListWidget(QWidget* parent)
+{
 }
 
 VideoListWidget::~VideoListWidget()
 {
-
 }

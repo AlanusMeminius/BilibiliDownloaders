@@ -1,28 +1,179 @@
-<UI version="4.0" >
- <class>MainWindowClass</class>
- <widget class="QMainWindow" name="MainWindowClass" >
-  <property name="objectName" >
-   <string notr="true">MainWindowClass</string>
-  </property>
-  <property name="geometry" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>856</width>
+    <height>575</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>MainWindow</string>
-  </property>  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="TitleWidget" name="widgetTitle" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>851</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>36</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>36</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>140</y>
+      <width>801</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <widget class="SearchLineEdit" name="lineEditSearch" native="true">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>0</y>
+       <width>471</width>
+       <height>48</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnTab">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>0</y>
+       <width>48</width>
+       <height>48</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">.QPushButton
+{
+border-radius:8px;
+border:none;
+padding:4px;
+image:url(:/MainWindow/grid.svg);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnList">
+     <property name="geometry">
+      <rect>
+       <x>730</x>
+       <y>0</y>
+       <width>48</width>
+       <height>48</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">.QPushButton
+{
+border-radius:8px;
+border:none;
+padding:4px;
+image:url(:/MainWindow/server.svg);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>470</y>
+      <width>111</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>460</y>
+      <width>101</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>470</y>
+      <width>121</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widget_2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>220</y>
+      <width>801</width>
+      <height>211</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>TitleWidget</class>
+   <extends>QWidget</extends>
+   <header>titlewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SearchLineEdit</class>
+   <extends>QWidget</extends>
+   <header>ClientUi/Compent/SearchLineEdit.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
-   <include location="MainWindow.qrc"/>
+  <include location="../../../Resource/MainWindow.qrc"/>
  </resources>
  <connections/>
-</UI>
+</ui>

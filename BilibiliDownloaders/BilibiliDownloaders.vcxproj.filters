@@ -55,6 +55,21 @@
     <Filter Include="Source Files\ClientUi\VideoList">
       <UniqueIdentifier>{3fa1e496-456b-4c05-ba8a-0527e19df21f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ThreadPool">
+      <UniqueIdentifier>{0cdb67ea-69af-42e7-95d6-8cce08ba9f75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ClientUi\Login">
+      <UniqueIdentifier>{fff0c7a5-143a-4127-a96c-39a490294a3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ClientUi\Config">
+      <UniqueIdentifier>{564bd42e-b0c7-4bbf-895f-3eed9f70451c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Config">
+      <UniqueIdentifier>{935ed820-68c3-4197-af38-809ca83617c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ClientUi\Compent">
+      <UniqueIdentifier>{69fbf64d-10c6-4ba5-8550-1491264402a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Aria2Net\AriaClient\AriaClient.cpp">
@@ -65,9 +80,6 @@
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BiliApi\BiliApi.cpp">
-      <Filter>Source Files\BiliApi</Filter>
     </ClCompile>
     <ClCompile Include="src\loger\dump.cpp">
       <Filter>Source Files\Loger</Filter>
@@ -93,17 +105,35 @@
     <ClCompile Include="src\ClientUi\MainWindow\MainWindow.cpp">
       <Filter>Source Files\ClientUi\MainWindow</Filter>
     </ClCompile>
+    <ClCompile Include="src\ClientUi\VideoList\VideoTabWidget.cpp">
+      <Filter>Source Files\ClientUi\VideoList</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BiliApi\BilibiliClient.cpp">
+      <Filter>Source Files\BiliApi</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ThreadPool\ThreadPool.cpp">
+      <Filter>Source Files\ThreadPool</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientUi\MainWindow\titlewidget.cpp">
+      <Filter>Source Files\ClientUi\MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientUi\VideoList\VideoDetailWidget.cpp">
+      <Filter>Source Files\ClientUi\VideoList</Filter>
+    </ClCompile>
     <ClCompile Include="src\ClientUi\VideoList\VideoListWidget.cpp">
       <Filter>Source Files\ClientUi\VideoList</Filter>
     </ClCompile>
-    <ClCompile Include="src\BiliApi\WebClient.cpp">
-      <Filter>Source Files\BiliApi</Filter>
+    <ClCompile Include="src\ClientUi\Login\LoginWidget.cpp">
+      <Filter>Source Files\ClientUi\Login</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientUi\Config\SingleConfigRander.cpp">
+      <Filter>Source Files\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientUi\Compent\SearchLineEdit.cpp">
+      <Filter>Source Files\ClientUi\Compent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="src\Aria2Net\AriaClient\AriaClient.h">
-      <Filter>Source Files\Aria2Net\AriaClient</Filter>
-    </QtMoc>
     <QtMoc Include="src\Aria2Net\AriaServer\AriaServer.h">
       <Filter>Source Files\Aria2Net\AriaServer</Filter>
     </QtMoc>
@@ -116,19 +146,46 @@
     <QtMoc Include="src\ClientUi\MainWindow\MainWindow.h">
       <Filter>Source Files\ClientUi\MainWindow</Filter>
     </QtMoc>
-    <QtMoc Include="src\BiliApi\WebClient.h">
-      <Filter>Source Files\BiliApi</Filter>
+    <QtMoc Include="src\ClientUi\VideoList\VideoTabWidget.h">
+      <Filter>Source Files\ClientUi\VideoList</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ThreadPool\Task.h">
+      <Filter>Source Files\ThreadPool</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ClientUi\MainWindow\titlewidget.h">
+      <Filter>Source Files\ClientUi\MainWindow</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ClientUi\VideoList\VideoDetailWidget.h">
+      <Filter>Source Files\ClientUi\VideoList</Filter>
     </QtMoc>
     <QtMoc Include="src\ClientUi\VideoList\VideoListWidget.h">
       <Filter>Source Files\ClientUi\VideoList</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ClientUi\Login\LoginWidget.h">
+      <Filter>Source Files\ClientUi\Login</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ClientUi\Compent\SearchLineEdit.h">
+      <Filter>Source Files\ClientUi\Compent</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="src\ClientUi\MainWindow\MainWindow.ui">
       <Filter>Source Files\ClientUi\MainWindow</Filter>
     </QtUic>
+    <QtUic Include="src\ClientUi\VideoList\VideoTabWidget.ui">
+      <Filter>Source Files\ClientUi\VideoList</Filter>
+    </QtUic>
+    <QtUic Include="src\ClientUi\VideoList\VideoDetailWidget.ui">
+      <Filter>Source Files\ClientUi\VideoList</Filter>
+    </QtUic>
     <QtUic Include="src\ClientUi\VideoList\VideoListWidget.ui">
       <Filter>Source Files\ClientUi\VideoList</Filter>
+    </QtUic>
+    <QtUic Include="src\ClientUi\Login\LoginWidget.ui">
+      <Filter>Source Files\ClientUi\Login</Filter>
+    </QtUic>
+    <QtUic Include="src\ClientUi\Compent\SearchLineEdit.ui">
+      <Filter>Source Files\ClientUi\Compent</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +229,18 @@
     </ClInclude>
     <ClInclude Include="src\Aria2Net\AriaLog.h">
       <Filter>Source Files\Aria2Net</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ThreadPool\ThreadPool.h">
+      <Filter>Source Files\ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Aria2Net\AriaClient\AriaClient.h">
+      <Filter>Source Files\Aria2Net\AriaClient</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BiliApi\BilibiliClient.h">
+      <Filter>Source Files\BiliApi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ClientUi\Config\SingleConfigRander.h">
+      <Filter>Source Files\Config</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

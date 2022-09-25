@@ -18,16 +18,10 @@ const std::string GetGuid()
     return strGuid;
 }
 
-
-AriaClient::AriaClient(QObject *parent)
-    : QObject(parent)
-
+AriaClient& AriaClient::GetInstance()
 {
-
-}
-
-AriaClient::~AriaClient()
-{
+    static AriaClient ariaClient;
+    return ariaClient;
 }
 
 SystemListNotifications AriaClient::listNotificationsAsync()
@@ -321,7 +315,7 @@ AriaChangeOption AriaClient::ChangeOptionAsync(const std::string& gid, const Lis
 std::string AriaClient::Request(const std::string& url, const std::string& param)
 {
     std::string strResponse;
-    CNetWork::GetInstance().HttpPost(url, param, strResponse);
+    HttpPost(url, param, strResponse);
     return strResponse;
 }
 

@@ -1,4 +1,9 @@
 <RCC>
-    <qresource prefix="MainWindow">
+    <qresource prefix="/MainWindow">
+        <file>download.svg</file>
+        <file>grid.svg</file>
+        <file>file-text.svg</file>
+        <file>server.svg</file>
+        <file>search.svg</file>
     </qresource>
 </RCC>

@@ -111,10 +111,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\BiliApi\BiliApi.cpp" />
-    <ClCompile Include="src\BiliApi\WebClient.cpp" />
+    <ClCompile Include="src\BiliApi\BilibiliClient.cpp" />
+    <ClCompile Include="src\ClientUi\Compent\SearchLineEdit.cpp" />
+    <ClCompile Include="src\ClientUi\Config\SingleConfigRander.cpp" />
+    <ClCompile Include="src\ClientUi\Login\LoginWidget.cpp" />
     <ClCompile Include="src\ClientUi\MainWindow\MainWindow.cpp" />
+    <ClCompile Include="src\ClientUi\MainWindow\titlewidget.cpp" />
+    <ClCompile Include="src\ClientUi\VideoList\VideoDetailWidget.cpp" />
     <ClCompile Include="src\ClientUi\VideoList\VideoListWidget.cpp" />
+    <ClCompile Include="src\ClientUi\VideoList\VideoTabWidget.cpp" />
     <ClCompile Include="src\FFmpeg\FFmpegHelper.cpp" />
     <ClCompile Include="src\loger\dump.cpp" />
     <ClCompile Include="src\loger\Loger.cpp" />
@@ -122,13 +127,18 @@
     <ClCompile Include="src\NetWork\CNetWork.cpp" />
     <ClCompile Include="src\Sqlite\SQLiteDatabase.cpp" />
     <ClCompile Include="src\Test\SimpleNetwork.cpp" />
+    <ClCompile Include="src\ThreadPool\ThreadPool.cpp" />
     <ClCompile Include="src\Util\UrlProcess.cpp" />
     <ClCompile Include="src\Aria2Net\AriaClient\AriaClient.cpp" />
     <ClCompile Include="src\Aria2Net\AriaServer\AriaServer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="src\ClientUi\Compent\SearchLineEdit.ui" />
+    <QtUic Include="src\ClientUi\Login\LoginWidget.ui" />
     <QtUic Include="src\ClientUi\MainWindow\MainWindow.ui" />
+    <QtUic Include="src\ClientUi\VideoList\VideoDetailWidget.ui" />
     <QtUic Include="src\ClientUi\VideoList\VideoListWidget.ui" />
+    <QtUic Include="src\ClientUi\VideoList\VideoTabWidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource\MainWindow.qrc" />
@@ -138,10 +148,16 @@
     <ClInclude Include="src\Aria2Net\AriaLog.h" />
     <ClInclude Include="src\Aria2Net\Protocol\Protocol.h" />
     <QtMoc Include="src\Aria2Net\AriaServer\AriaServer.h" />
-    <QtMoc Include="src\Aria2Net\AriaClient\AriaClient.h" />
-    <QtMoc Include="src\BiliApi\WebClient.h" />
+    <ClInclude Include="src\Aria2Net\AriaClient\AriaClient.h" />
+    <ClInclude Include="src\BiliApi\BilibiliClient.h" />
     <QtMoc Include="src\ClientUi\MainWindow\MainWindow.h" />
+    <QtMoc Include="src\ClientUi\VideoList\VideoTabWidget.h" />
+    <QtMoc Include="src\ClientUi\MainWindow\titlewidget.h" />
+    <QtMoc Include="src\ClientUi\VideoList\VideoDetailWidget.h" />
     <QtMoc Include="src\ClientUi\VideoList\VideoListWidget.h" />
+    <QtMoc Include="src\ClientUi\Login\LoginWidget.h" />
+    <QtMoc Include="src\ClientUi\Compent\SearchLineEdit.h" />
+    <ClInclude Include="src\ClientUi\Config\SingleConfigRander.h" />
     <ClInclude Include="src\FFmpeg\FFmpegLog.h" />
     <ClInclude Include="src\loger\dump.h" />
     <ClInclude Include="src\AppVersion.h" />
@@ -152,6 +168,8 @@
     <QtMoc Include="src\NetWork\CNetWork.h" />
     <ClInclude Include="src\NetWork\NetworkLog.h" />
     <ClInclude Include="src\Sqlite\SQLiteDatabase.h" />
+    <QtMoc Include="src\ThreadPool\Task.h" />
+    <ClInclude Include="src\ThreadPool\ThreadPool.h" />
     <ClInclude Include="src\Util\UrlProcess.h" />
   </ItemGroup>
   <ItemGroup>

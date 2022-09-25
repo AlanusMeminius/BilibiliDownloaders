@@ -9,10 +9,11 @@ namespace
     constexpr int logFileMaxSize = 20 * 1024 * 1024; // 20M
 }
 
+Logger Logger::m_logger;
+
 Logger& Logger::GetInstance()
 {
-    static Logger logger;
-    return logger;
+    return m_logger;
 }
 
 void Logger::InitLog()

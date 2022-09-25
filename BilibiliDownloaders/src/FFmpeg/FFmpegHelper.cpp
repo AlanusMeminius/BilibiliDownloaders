@@ -20,7 +20,7 @@ FFmpegHelper::FFmpegHelper()
 
 FFmpegHelper::~FFmpegHelper()
 {
-    // CloseFFmpeg();
+    CloseFFmpeg();
 }
 
 bool FFmpegHelper::MegerVideo(const std::string& audio, const std::string& video, const std::string& destionVideo)

@@ -13,11 +13,8 @@ namespace aria2net
 const std::string GetRpcUri(int listenPort = 6800);
 const std::string GetGuid();
 
-class AriaClient : public QObject
+class AriaClient : public CNetWork
 {
-    Q_OBJECT
-
-    using ListString = std::list<std::string>;
 public:
     enum HowChangePosition
     {
@@ -26,8 +23,9 @@ public:
         POS_END
     };
 
-    AriaClient(QObject* parent = nullptr);
-    ~AriaClient();
+    using ListString = std::list<std::string>;
+
+    static AriaClient& GetInstance();
 
     SystemListNotifications listNotificationsAsync();
     SystemListMethods ListMethodsAsync();
@@ -53,6 +51,16 @@ public:
 private:
     static constexpr char JSONRPC[] = "2.0";
     static constexpr char TOKEN[] = "downkyi";
+
+    AriaClient() = default;
+    ~AriaClient() = default;
+
+    // µ¥Àý½ûÖ¹
+    AriaClient(const AriaClient& other) = delete;
+    AriaClient& operator=(const AriaClient& other) = delete;
+    AriaClient(AriaClient&& other) = delete;
+    AriaClient& operator=(AriaClient&& other) = delete;
+
 
     template<typename Result>
     Result GetResult(const AriaSendData& sendData);

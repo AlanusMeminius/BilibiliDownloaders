@@ -22,4 +22,6 @@ private:
 	// ◊¢≤·logger∫Õ…Ë÷√
 	void RegisterLogger(const std::string& logName);
 	void SetLog();
+
+	static Logger m_logger;
 };

@@ -12,6 +12,11 @@ class Protocol
 public:
     Protocol() = default;
     Protocol(nlohmann::json json) : m_json(std::move(json)) {}
+    Protocol(Protocol&& other) noexcept { m_json = std::move(other.m_json); }
+    Protocol(const Protocol& other) { m_json = other.m_json; }
+    Protocol& operator=(const Protocol& other) { m_json = other.m_json; };
+    Protocol& operator=(Protocol&& other) noexcept { m_json = std::move(other.m_json); };
+
     virtual ~Protocol() = default;
     virtual const std::string toString() const { return m_json.dump(); };
     virtual void request() {};

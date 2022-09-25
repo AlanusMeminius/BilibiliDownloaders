@@ -36,8 +36,11 @@ class UrlProcess
 public:
     static bool IsUrl(const QString& text);
     static bool IsIntId(const QString& text);
+    static bool IsBvId(const QString& text);
+    static bool IsBvUrl(const QString& text);
     static QString DeleteUrlParam(const QString& url);
-    static QString GetId(const QString& text);
+    static QString GetId(const QString& text, const QString& baseUrl);
+    static QString GetVideoId(const QString& text);
     static QString EnableHttps(const QString& url);
 };
 
