@@ -63,7 +63,7 @@ int GenerateMiniDump(PEXCEPTION_POINTERS pExceptionPointers)
     expParam.ExceptionPointers = pExceptionPointers;
     expParam.ClientPointers = false;
     pfnMiniDumpWriteDump(::GetCurrentProcess(), ::GetCurrentProcessId(),
-        hDumpFile, MiniDumpWithDataSegs, (pExceptionPointers ? &expParam : nullptr), nullptr, nullptr);
+        hDumpFile, MiniDumpWithFullMemory, (pExceptionPointers ? &expParam : nullptr), nullptr, nullptr);
     
     // ÊÍ·ÅÎÄ¼þ
     ::CloseHandle(hDumpFile);

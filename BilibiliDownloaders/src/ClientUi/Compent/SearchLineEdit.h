@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QLineEdit>
-#include "ui_SearchLineEdit.h"
 
 namespace Ui { class SearchLineEdit; };
 

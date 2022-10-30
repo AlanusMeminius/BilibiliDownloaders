@@ -13,6 +13,8 @@ public:
     LoginWidget(QWidget *parent = nullptr);
     ~LoginWidget();
 
+    void SetUi();
+    void SignalsAndSlots();
 private:
     Ui::LoginWidget* ui;
 };

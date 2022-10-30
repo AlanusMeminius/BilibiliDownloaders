@@ -1,5 +1,4 @@
 #pragma once
-#pragma execution_character_set("utf-8")
 
 #include <QString>
 
@@ -42,6 +41,13 @@ public:
     static QString GetId(const QString& text, const QString& baseUrl);
     static QString GetVideoId(const QString& text);
     static QString EnableHttps(const QString& url);
+};
+
+static constexpr char splicalChars[] = "?¡°¡±/\<>*|:";
+class FileHelp
+{
+public:
+    static QString RemoveSpicalChar(const QString& path);
 };
 
 } // namespace util

@@ -70,6 +70,10 @@
     <PreBuildEvent>
       <Command>version.cmd</Command>
     </PreBuildEvent>
+    <QtTranslation>
+      <BuildAction>false</BuildAction>
+      <QmOutputDir>$(OutDir)/Language</QmOutputDir>
+    </QtTranslation>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -114,12 +118,14 @@
     <ClCompile Include="src\BiliApi\BilibiliClient.cpp" />
     <ClCompile Include="src\ClientUi\Compent\SearchLineEdit.cpp" />
     <ClCompile Include="src\ClientUi\Config\SingleConfigRander.cpp" />
+    <ClCompile Include="src\ClientUi\Download\CDownloadDialog.cpp" />
     <ClCompile Include="src\ClientUi\Login\LoginWidget.cpp" />
     <ClCompile Include="src\ClientUi\MainWindow\MainWindow.cpp" />
     <ClCompile Include="src\ClientUi\MainWindow\titlewidget.cpp" />
     <ClCompile Include="src\ClientUi\VideoList\VideoDetailWidget.cpp" />
     <ClCompile Include="src\ClientUi\VideoList\VideoListWidget.cpp" />
     <ClCompile Include="src\ClientUi\VideoList\VideoTabWidget.cpp" />
+    <ClCompile Include="src\Download\Downloader.cpp" />
     <ClCompile Include="src\FFmpeg\FFmpegHelper.cpp" />
     <ClCompile Include="src\loger\dump.cpp" />
     <ClCompile Include="src\loger\Loger.cpp" />
@@ -134,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="src\ClientUi\Compent\SearchLineEdit.ui" />
+    <QtUic Include="src\ClientUi\Download\CDownloadDialog.ui" />
     <QtUic Include="src\ClientUi\Login\LoginWidget.ui" />
     <QtUic Include="src\ClientUi\MainWindow\MainWindow.ui" />
     <QtUic Include="src\ClientUi\VideoList\VideoDetailWidget.ui" />
@@ -158,6 +165,9 @@
     <QtMoc Include="src\ClientUi\Login\LoginWidget.h" />
     <QtMoc Include="src\ClientUi\Compent\SearchLineEdit.h" />
     <ClInclude Include="src\ClientUi\Config\SingleConfigRander.h" />
+    <QtMoc Include="src\ClientUi\Download\CDownloadDialog.h" />
+    <ClInclude Include="src\Download\AbstractTransmission.h" />
+    <ClInclude Include="src\Download\Downloader.h" />
     <ClInclude Include="src\FFmpeg\FFmpegLog.h" />
     <ClInclude Include="src\loger\dump.h" />
     <ClInclude Include="src\AppVersion.h" />

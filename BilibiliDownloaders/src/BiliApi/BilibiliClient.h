@@ -1,5 +1,4 @@
 #pragma once
-#pragma execution_character_set("utf-8")
 
 #include <QObject>
 
@@ -23,13 +22,12 @@ class BilibiliClient : public CNetWork
 {
 public:
     static BilibiliClient& GetInstance();
+
     VideoView GetVideoView(const std::string& bvid);
     PlayUrl GetPlayUrl(long long cid, long long qn, const std::string& bvid);
 
     
     static nlohmann::json GetDataFromRespones(const std::string& respones);
-    
-
 private:
     BilibiliClient();
     ~BilibiliClient() = default;

@@ -1,4 +1,4 @@
-#include "titlewidget.h"
+#include "TitleWidget.h"
 
 #include <QPushButton>
 #include <QLabel>
@@ -17,8 +17,15 @@ TitleWidget::TitleWidget(QWidget* parent)
     , m_btnMax(new QPushButton(this))
     , m_btnClose(new QPushButton(this))
 {
+    SetUi();
     setAttribute(Qt::WA_StyledBackground);
 
+    SignalsAndSlots();
+
+}
+
+void TitleWidget::SetUi()
+{
     m_btnMax->setToolTip(tr("Maximize"));
     m_btnMax->setIcon(style()->standardPixmap(QStyle::SP_TitleBarMaxButton));
     m_btnMin->setToolTip("Minimize");
@@ -26,16 +33,20 @@ TitleWidget::TitleWidget(QWidget* parent)
     m_btnClose->setToolTip("Close");
     m_btnClose->setIcon(style()->standardPixmap(QStyle::SP_TitleBarCloseButton));
 
+    window()->installEventFilter(this);
+}
 
-    connect(m_btnMin, &QPushButton::clicked, parent, [&]() {
+void TitleWidget::SignalsAndSlots()
+{
+    connect(m_btnMin, &QPushButton::clicked, this, [&]() {
         window()->showMinimized();
     });
 
-    connect(m_btnMax, &QPushButton::clicked, parent, [&]() {
+    connect(m_btnMax, &QPushButton::clicked, this, [&]() {
         window()->isMaximized() ? window()->showNormal() : window()->showMaximized();
     });
 
-    connect(m_btnClose, &QPushButton::clicked, parent, [&]() {
+    connect(m_btnClose, &QPushButton::clicked, this, [&]() {
         window()->close();
     });
 }
@@ -77,7 +88,7 @@ bool TitleWidget::eventFilter(QObject* obj, QEvent* event)
         QWidget* widget = qobject_cast<QWidget*>(obj);
         if (widget)
         {
-            setWindowTitle(widget->windowTitle());
+            m_labelTitle->setText(widget->windowTitle());
             return true;
         }
     }
@@ -102,4 +113,6 @@ void TitleWidget::resizeEvent(QResizeEvent* event)
     m_btnMin->setGeometry(QRect(width() - 8 - 34 * 3, 0, 33, 28));
     m_btnMax->setGeometry(QRect(width() - 8 - 34 * 2, 0, 33, 28));
     m_btnClose->setGeometry(QRect(width() - 8 - 34 * 1, 0, 33, 28));
+
+    return QWidget::resizeEvent(event);
 }

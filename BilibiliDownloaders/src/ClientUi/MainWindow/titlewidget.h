@@ -12,6 +12,10 @@ class TitleWidget : public QWidget
 public:
     TitleWidget(QWidget* parent = nullptr);
 
+
+    void SetUi();
+    void SignalsAndSlots();
+
 protected:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseDoubleClickEvent(QMouseEvent* event) override;

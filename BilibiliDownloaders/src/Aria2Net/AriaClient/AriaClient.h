@@ -1,5 +1,4 @@
 #pragma once
-#pragma execution_character_set("utf-8")
 
 #include <QObject>
 
@@ -46,6 +45,7 @@ public:
     AriaChangePosition ChangePositionAsync(const std::string& gid, int pos, HowChangePosition how);
     //AriaTellStatusList TellStoppedAsync(int offset, int num);
     AriaAddUri AddUriAsync(ListString uris, AriaSendOption option, int position = -1);
+    AriaTellStatus TellStatus(const std::string& gid);
 
 
 private:

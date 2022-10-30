@@ -11,6 +11,14 @@ bool UrlProcess::IsUrl(const QString& text)
     return text.startsWith("http://") || text.startsWith("https://");
 }
 
+bool UrlProcess::IsIntId(const QString& text)
+{
+    bool bIsInt = false;
+    text.toInt(&bIsInt);
+    return bIsInt
+   ;
+}
+
 bool UrlProcess::IsBvId(const QString& text)
 {
     return text.startsWith("BV") && text.length() == 12;
@@ -70,6 +78,17 @@ QString UrlProcess::EnableHttps(const QString& url)
         return result.replace("http://", "https://");
     }
     return {};
+}
+
+QString FileHelp::RemoveSpicalChar(const QString& path)
+{
+    QString temp = path;
+    for (const auto& splicalChar : QString(splicalChars))
+    {
+        temp.remove(splicalChar);
+    }
+
+    return temp;
 }
 
 } // util

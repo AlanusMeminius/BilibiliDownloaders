@@ -61,14 +61,17 @@
     <Filter Include="Source Files\ClientUi\Login">
       <UniqueIdentifier>{fff0c7a5-143a-4127-a96c-39a490294a3b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ClientUi\Config">
-      <UniqueIdentifier>{564bd42e-b0c7-4bbf-895f-3eed9f70451c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Config">
       <UniqueIdentifier>{935ed820-68c3-4197-af38-809ca83617c8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\ClientUi\Compent">
       <UniqueIdentifier>{69fbf64d-10c6-4ba5-8550-1491264402a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Download">
+      <UniqueIdentifier>{16a19c65-45a6-46be-a5b8-348f53531f3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ClientUi\Download">
+      <UniqueIdentifier>{69d8f916-d26b-4536-817b-da9705a4302f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +135,12 @@
     <ClCompile Include="src\ClientUi\Compent\SearchLineEdit.cpp">
       <Filter>Source Files\ClientUi\Compent</Filter>
     </ClCompile>
+    <ClCompile Include="src\ClientUi\Download\CDownloadDialog.cpp">
+      <Filter>Source Files\ClientUi\Download</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Download\Downloader.cpp">
+      <Filter>Source Files\Download</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\Aria2Net\AriaServer\AriaServer.h">
@@ -167,6 +176,9 @@
     <QtMoc Include="src\ClientUi\Compent\SearchLineEdit.h">
       <Filter>Source Files\ClientUi\Compent</Filter>
     </QtMoc>
+    <QtMoc Include="src\ClientUi\Download\CDownloadDialog.h">
+      <Filter>Source Files\ClientUi\Download</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="src\ClientUi\MainWindow\MainWindow.ui">
@@ -186,6 +198,9 @@
     </QtUic>
     <QtUic Include="src\ClientUi\Compent\SearchLineEdit.ui">
       <Filter>Source Files\ClientUi\Compent</Filter>
+    </QtUic>
+    <QtUic Include="src\ClientUi\Download\CDownloadDialog.ui">
+      <Filter>Source Files\ClientUi\Download</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +256,12 @@
     </ClInclude>
     <ClInclude Include="src\ClientUi\Config\SingleConfigRander.h">
       <Filter>Source Files\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Download\AbstractTransmission.h">
+      <Filter>Source Files\Download</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Download\Downloader.h">
+      <Filter>Source Files\Download</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

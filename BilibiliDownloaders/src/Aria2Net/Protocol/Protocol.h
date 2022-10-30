@@ -1,5 +1,4 @@
 #pragma once
-#pragma execution_character_set("utf-8")
 
 #include <nlohmann/json.hpp>
 #include <vector>
@@ -584,11 +583,97 @@ public:
     void SetOut(const std::string& out) { m_json["out"] = out; }
     const std::string& GetOut() const { return m_json["out"]; };
 
-    void SetDir(const std::string& method) { m_json["dir"] = method; }
-    const std::string& GetDie() const { return m_json["dir"]; }
+    void SetDir(const std::string& dir) { m_json["dir"] = dir; }
+    const std::string& GetDir() const { return m_json["dir"]; }
 
 
 };
 
+class AriaTellStatusResultFile : public Protocol
+{
+public:
+    AriaTellStatusResultFile() = default;
+    AriaTellStatusResultFile(nlohmann::json json) : Protocol(std::move(json)) { }
+    ~AriaTellStatusResultFile() = default;
+
+    void request() override {};
+
+    void SetCompletedLength(const std::string& completedLength) { m_json["completedLength"] = completedLength; }
+    const std::string& GetCompletedLength() const { return m_json["completedLength"]; }
+
+    void SetIndex(const std::string& index) { m_json["index"] = index; }
+    const std::string& GetIndex() const { return m_json["index"]; };
+
+    void SetLength(const std::string& length) { m_json["length"] = length; }
+    const std::string& GetLength() const { return m_json["length"]; }
+
+    void SetPath(const std::string& path) { m_json["path"] = path; }
+    const std::string& GetPath() const { return m_json["path"]; }
+
+    void SetSelected(const std::string& selected) { m_json["selected"] = selected; }
+    const std::string& GetSelected() const { return m_json["selected"]; }
+
+    void SetUris(const std::list<AriaUri>& uris) { m_json["uris"] = uris; }
+    const std::list<AriaUri> GetUris() const { return m_json["uris"]; }
+};
+
+
+class AriaTellStatusResult : public Protocol
+{
+public:
+    AriaTellStatusResult() = default;
+    AriaTellStatusResult(nlohmann::json json) : Protocol(std::move(json)) { }
+    ~AriaTellStatusResult() = default;
+
+    void request() override {};
+
+    void SetBitfield(const std::string& bitfield) { m_json["bitfield"] = bitfield; }
+    const std::string& GetBitfield() const { return m_json["bitfield"]; }
+
+    void SetCompletedLength(const std::string& completedLength) { m_json["completedLength"] = completedLength; }
+    const std::string& GetCompletedLength() const { return m_json["completedLength"]; }
+
+    void SetConnections(const std::string& connections) { m_json["connections"] = connections; }
+    const std::string& GetConnections() const { return m_json["connections"]; }
+
+    void SetDir(const std::string& dir) { m_json["dir"] = dir; }
+    const std::string& GetDir() const { return m_json["dir"]; }
+
+    void SetDownloadSpeed(const std::string& downloadSpeed) { m_json["downloadSpeed"] = downloadSpeed; }
+    const std::string& GetDownloadSpeed() const { return m_json["downloadSpeed"]; }
+
+    void SetErrorCode(const std::string& errorCode) { m_json["errorCode"] = errorCode; }
+    const std::string& GetErrorCode() const { return m_json["errorCode"]; }
+
+    void SetErrorMessage(const std::string& errorMessage) { m_json["errorMessage"] = errorMessage; }
+    const std::string& GetErrorMessage() const { return m_json["errorMessage"]; }
+
+    void SetFiles(const std::list<AriaTellStatusResultFile>& files) { m_json["files"] = files; }
+    const std::list<AriaTellStatusResultFile> GetFiles() const { return m_json["files"]; }
+
+    void SetGid(const std::string& gid) { m_json["gid"] = gid; }
+    const std::string& GetGid() const { return m_json["gid"]; }
+
+    void SetNumPieces(const std::string& numPieces) { m_json["numPieces"] = numPieces; }
+    const std::string& GetNumPieces() const { return m_json["numPieces"]; }
+
+    void SetPieceLength(const std::string& pieceLength) { m_json["pieceLength"] = pieceLength; }
+    const std::string& GetPieceLength() const { return m_json["pieceLength"]; }
+
+    void SetStatus(const std::string& status) { m_json["status"] = status; }
+    const std::string& GetStatus() const { return m_json["status"]; }
+
+    void SetTotalLength(const std::string& totalLength) { m_json["totalLength"] = totalLength; }
+    const std::string& GetTotalLength() const { return m_json["totalLength"]; }
+
+    void SetUploadLength(const std::string& uploadLength) { m_json["uploadLength"] = uploadLength; }
+    const std::string& GetUploadLength() const { return m_json["uploadLength"]; }
+
+    void SetUploadSpeed(const std::string& uploadSpeed) { m_json["uploadSpeed"] = uploadSpeed; }
+    const std::string& GetUploadSpeed() const { return m_json["uploadSpeed"]; }
+};
+
+using AriaTellStatusList = AriaBasicJson<std::list<AriaTellStatusResult>>;
+using AriaTellStatus = AriaBasicJson<AriaTellStatusResult>;
 
 } // namespace aria2net

@@ -1,5 +1,4 @@
 #pragma once
-#pragma execution_character_set("utf-8")
 
 #define _STR(A) #A
 #define STR(A) _STR(A)
@@ -8,21 +7,21 @@
 #define APP_MINOR 0
 #define APP_PATCH 0
 
-#define APP_GIT_HASH  83b91ac0562290da3b3ab038014741bc583f869d
+#define APP_GIT_HASH  ac1d7423f407d23e2cbda4a42e46eaecd3981aa9
 
 #define APP_VERSION 10000*APP_MAJOR + 100*APP_MINOR + APP_PATCH
 #define APP_VERSION_STR APP_MAJOR.#APP_MINOR#.APP_PATCH
 #define APP_VERSION_STR_WITH_GIT APP_VERSION_STR.#APP_GIT_HASH
 
 #define APP_BUILD_YEAR       2022
-#define APP_BUILD_MONTH      09
-#define APP_BUILD_DAY        25
+#define APP_BUILD_MONTH      10
+#define APP_BUILD_DAY        30
 
 #define APP_BUILD_DATE APP_BUILD_YEAR.#APP_BUILD_MONTH#.APP_BUILD_DAY
 
-#define APP_BUILD_HOUR       19
-#define APP_BUILD_MINUTE     47
-#define APP_BUILD_SECOND     37
+#define APP_BUILD_HOUR       20
+#define APP_BUILD_MINUTE     46
+#define APP_BUILD_SECOND     40
 
 #define APP_BUILD_TIME APP_BUILD_HOUR.#APP_BUILD_MINUTE#.APP_BUILD_SECOND
 

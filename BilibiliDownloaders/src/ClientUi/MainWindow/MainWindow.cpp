@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // нч╠ъ©Р
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
-
+    setWindowTitle(tr("Bili Downloader"));
     SignalsAndSlots();
 }
 
@@ -76,9 +76,9 @@ void MainWindow::SearchUrl()
 
 
     aria2net::AriaClient& ariaClient = aria2net::AriaClient::GetInstance();
-    ariaClient.AddUriAsync(video_urls, ariaSendOption);
+    auto ariaAddUriVideo =  ariaClient.AddUriAsync(video_urls, ariaSendOption);
     ariaSendOption.SetOut(bvid + ".mp3");
-    ariaClient.AddUriAsync(audio_urls, ariaSendOption);
+    auto ariaAddUriAudio = ariaClient.AddUriAsync(audio_urls, ariaSendOption);
 
 
     std::this_thread::sleep_for(std::chrono::milliseconds(10000));
