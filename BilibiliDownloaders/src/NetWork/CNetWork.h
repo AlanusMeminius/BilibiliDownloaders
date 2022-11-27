@@ -39,10 +39,10 @@ public:
     void AppendHeaders(curl_slist* headers);
     void AppendHeaders(const std::string& header);
 
-private:
+protected:
     void InitDefaultHeaders();
+    void InitDefaultHeadersLogin();
 
-private:
     curl_slist* m_headers; // ÇëÇóÍ·
     class CurlHelp
     {

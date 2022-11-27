@@ -121,7 +121,7 @@ void CNetWork::HttpGet(const std::string& url, std::string& response)
     curl_easy_setopt(curlHandle, CURLOPT_TIMEOUT, 5000);
     curl_easy_setopt(curlHandle, CURLOPT_ACCEPT_ENCODING, "gzip");
     curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYPEER, false);
-    curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYHOST, false);
+    curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYHOST, false); 
     CURLcode retCode = curl_easy_perform(curlHandle);
     if (retCode != CURLE_OK)
     {
@@ -132,8 +132,16 @@ void CNetWork::HttpGet(const std::string& url, std::string& response)
 
 void CNetWork::HttpPost(const std::string& url, ParamType params, std::string& response)
 {
-    nlohmann::json jsonParams;
+    //std::list<std::string> listParams;
+    //for (const auto& param : params) 
+    //{
+    //    listParams.emplace_back(param.first + " " + param.second);
+    //}
+
+     nlohmann::json jsonParam = params;
+ 
     
+    HttpPost(url, jsonParam.dump(), response);
 }
 
 void CNetWork::HttpPost(const std::string& url, const std::string& params, std::string& response)
@@ -151,7 +159,9 @@ void CNetWork::HttpPost(const std::string& url, const std::string& params, std::
     curl_easy_setopt(curlHandle, CURLOPT_ACCEPT_ENCODING, "gzip");
     curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYPEER, false);
     curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYHOST, false);
+    curl_easy_setopt(curlHandle, CURLOPT_COOKIEFILE, "cookie.txt");
     CURLcode retCode = curl_easy_perform(curlHandle);
+
     if (retCode != CURLE_OK)
     {
         NETWORK_LOG_ERROR("HttpPost occured error: {}", retCode);
@@ -188,6 +198,15 @@ void CNetWork::InitDefaultHeaders()
     m_headers = curl_slist_append(m_headers, accept_encoding);
     m_headers = curl_slist_append(m_headers, accept_language);
     m_headers = curl_slist_append(m_headers, userAgent.c_str());
+}
+
+void CNetWork::InitDefaultHeadersLogin() 
+{
+    std::string userAgent = std::string("user-agent: ") + chrome;
+    std::string referer   = "referer: https://passport.bilibili.com/login";
+    m_headers             = curl_slist_append(m_headers, accept_language);
+    m_headers             = curl_slist_append(m_headers, userAgent.c_str());
+    m_headers             = curl_slist_append(m_headers, referer.c_str());
 }
 
 

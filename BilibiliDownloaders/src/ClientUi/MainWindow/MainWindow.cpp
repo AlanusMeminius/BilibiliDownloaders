@@ -80,13 +80,44 @@ void MainWindow::SearchUrl()
     ariaSendOption.SetOut(bvid + ".mp3");
     auto ariaAddUriAudio = ariaClient.AddUriAsync(audio_urls, ariaSendOption);
 
+    auto json = ariaAddUriVideo.GetJson();
+    // qDebug() << json["result"].c_str();
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+    auto future =  std::async(std::launch::async, [&, ariaAddUriVideo, ariaAddUriAudio]() {
+        bool videoOk = false, audioOk = false;
+        while (true)
+        {
+            auto json = ariaAddUriVideo.GetJson();
+            std::string str = json["result"];
 
-    FFmpegHelper::MegerVideo(dirPath.toStdString() + "/" + bvid + ".mp3", 
-                             dirPath.toStdString() + "/" + bvid + ".mp4", 
-                             dirPath.toStdString() + "/" + bvid + "all.mp4");
+            auto status = ariaClient.TellStatus(str);
+            if (status.GetResult().GetStatus() == "complete")
+            {
+                videoOk = true;
+            }
 
+            json = ariaAddUriAudio.GetJson();
+            str = json["result"];
+            status = ariaClient.TellStatus(str);
+            if (status.GetResult().GetStatus() == "complete")
+            {
+                audioOk = true;
+            }
+
+            if (audioOk && videoOk)
+            {
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                FFmpegHelper::MegerVideo(dirPath.toStdString() + "/" + bvid + ".mp3",
+                    dirPath.toStdString() + "/" + bvid + ".mp4",
+                    dirPath.toStdString() + "/" + bvid + "all.mp4");
+                break;
+            }
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        }
+    });
+
+    future.get();
 }
 
 void MainWindow::SetUi()

@@ -295,6 +295,23 @@ AriaAddUri AriaClient::AddUriAsync(ListString uris, AriaSendOption option, int p
     return GetResult<AriaAddUri>(ariaSend);
 }
 
+AriaTellStatus AriaClient::TellStatus(const std::string& gid)
+{
+    nlohmann::json params;
+
+    params[0] = std::string("token:") + TOKEN;
+    params[1] = gid;
+
+    AriaSendData ariaSend;
+    QUuid id = QUuid::createUuid();
+    ariaSend.SetId(GetGuid());
+    ariaSend.SetJsonrpc(JSONRPC);
+    ariaSend.SetMethod("aria2.tellStatus");
+    ariaSend.SetParams(params);
+
+    return GetResult<AriaTellStatus>(ariaSend);
+}
+
 AriaChangeOption AriaClient::ChangeOptionAsync(const std::string& gid, const ListString& option)
 {
     ListString listString;

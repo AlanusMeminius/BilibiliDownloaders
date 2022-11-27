@@ -33,6 +33,7 @@ void SearchLineEdit::SetEditFinishedSearch(bool enabled)
 
 void SearchLineEdit::resizeEvent(QResizeEvent* event)
 {
+    ui->btnSearch->move(width() - 42, ui->btnSearch->y());
     return QLineEdit::resizeEvent(event);
 }
 

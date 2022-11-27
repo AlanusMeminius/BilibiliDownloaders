@@ -141,6 +141,12 @@
     <ClCompile Include="src\Download\Downloader.cpp">
       <Filter>Source Files\Download</Filter>
     </ClCompile>
+    <ClCompile Include="src\ClientUi\Download\DownloadListWidget.cpp">
+      <Filter>Source Files\ClientUi\Download</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientUi\Download\CompletedListWidget.cpp">
+      <Filter>Source Files\ClientUi\Download</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\Aria2Net\AriaServer\AriaServer.h">
@@ -179,6 +185,12 @@
     <QtMoc Include="src\ClientUi\Download\CDownloadDialog.h">
       <Filter>Source Files\ClientUi\Download</Filter>
     </QtMoc>
+    <QtMoc Include="src\ClientUi\Download\DownloadListWidget.h">
+      <Filter>Source Files\ClientUi\Download</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ClientUi\Download\CompletedListWidget.h">
+      <Filter>Source Files\ClientUi\Download</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="src\ClientUi\MainWindow\MainWindow.ui">
@@ -200,6 +212,12 @@
       <Filter>Source Files\ClientUi\Compent</Filter>
     </QtUic>
     <QtUic Include="src\ClientUi\Download\CDownloadDialog.ui">
+      <Filter>Source Files\ClientUi\Download</Filter>
+    </QtUic>
+    <QtUic Include="src\ClientUi\Download\DownloadListWidget.ui">
+      <Filter>Source Files\ClientUi\Download</Filter>
+    </QtUic>
+    <QtUic Include="src\ClientUi\Download\CompletedListWidget.ui">
       <Filter>Source Files\ClientUi\Download</Filter>
     </QtUic>
   </ItemGroup>

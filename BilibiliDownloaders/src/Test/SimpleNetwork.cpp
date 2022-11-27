@@ -5,6 +5,7 @@
 #include <QNetworkRequest>
 #include <nlohmann/json.hpp>
 #include <QSslSocket>
+#include <QImage>
 
 #include <ObjBase.h>
 
@@ -76,4 +77,64 @@ SimpleNetwork::SimpleNetwork(QObject* parent)
 
 SimpleNetwork::~SimpleNetwork()
 {
+}
+
+QImage qr_code(std::string _src_str, std::string _dst_bmp_path) 
+{
+    unsigned int   unWidth, x, y, l, n, unWidthAdjusted, unDataBytes;
+    unsigned char *pRGBData, *pSourceData, *pDestData;
+    QRcode*        pQRC;
+
+    if (pQRC = QRcode_encodeString(_src_str.c_str(), 0, QR_ECLEVEL_H,
+                                    QR_MODE_8, 1)) 
+    {
+        unWidth         = pQRC->width;
+        unWidthAdjusted = unWidth * 8 * 3;
+        if (unWidthAdjusted % 4) {
+            unWidthAdjusted = (unWidthAdjusted / 4 + 1) * 4;
+        }
+        unDataBytes = unWidthAdjusted * unWidth * 8;
+        pRGBData    = (unsigned char*)malloc(unDataBytes);
+        memset(pRGBData, 0xff, unDataBytes);
+
+        // Convert QrCode bits to bmp pixels
+        pSourceData = pQRC->data;
+        for (y = 0; y < unWidth; y++)
+        {
+            pDestData = pRGBData + unWidthAdjusted * y * 8;
+            for (x = 0; x < unWidth; x++) 
+            {
+                if (*pSourceData & 1) 
+                {
+                    for (l = 0; l < 8; l++) 
+                    {
+                        for (n = 0; n < 8; n++) 
+                        {
+                            //以下三行是设置三基色 三基色设置0x00
+                            //则二维码颜色就是黑色的
+                            *(pDestData + n * 3 + unWidthAdjusted * l) =
+                                0xff;
+                            *(pDestData + 1 + n * 3 + unWidthAdjusted * l) =
+                                0x00;
+                            *(pDestData + 2 + n * 3 + unWidthAdjusted * l) =
+                                0x00;
+                        }
+                    }
+                }
+                pDestData += 3 * 8;
+                pSourceData++;
+            }
+        }
+
+        // output the bmp file
+        QImage image(pRGBData, unWidth*8, unWidth*8, unWidthAdjusted,
+                     QImage::Format_BGR888);
+        image.save("test1.bmp");
+        // Free data
+        free(pRGBData);
+        QRcode_free(pQRC);
+
+        return image;
+    }
+
 }

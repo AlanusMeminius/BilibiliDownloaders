@@ -18,7 +18,6 @@ AriaServer::AriaServer(QObject *parent)
     : QObject(parent)
     , m_pi{0}
 {
-    StartServerAsync();
 }
 
 AriaServer::~AriaServer()
@@ -28,6 +27,8 @@ AriaServer::~AriaServer()
 
 void AriaServer::StartServerAsync()
 {
+    ForceCloseServer();
+
     QString ariaPath = QApplication::applicationDirPath() + "/aria/";
     QString sessionFile = ariaPath + "aira.session";
     QString logFile = ariaPath + "log.txt";

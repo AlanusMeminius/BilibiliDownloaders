@@ -55,8 +55,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -65,14 +69,15 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcurl_imp.lib;avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;swresample.lib;swscale.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcurl_imp.lib;avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;swresample.lib;swscale.lib;sqlite3.lib;qrencode.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>version.cmd</Command>
     </PreBuildEvent>
     <QtTranslation>
       <BuildAction>false</BuildAction>
-      <QmOutputDir>$(OutDir)/Language</QmOutputDir>
+      <QmOutputDir>
+      </QmOutputDir>
     </QtTranslation>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -82,7 +87,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcurl_imp.lib;avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;swresample.lib;swscale.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcurl_imp.lib;avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;swresample.lib;swscale.lib;sqlite3.lib;qrencode.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>version.cmd</Command>
@@ -119,6 +124,8 @@
     <ClCompile Include="src\ClientUi\Compent\SearchLineEdit.cpp" />
     <ClCompile Include="src\ClientUi\Config\SingleConfigRander.cpp" />
     <ClCompile Include="src\ClientUi\Download\CDownloadDialog.cpp" />
+    <ClCompile Include="src\ClientUi\Download\CompletedListWidget.cpp" />
+    <ClCompile Include="src\ClientUi\Download\DownloadListWidget.cpp" />
     <ClCompile Include="src\ClientUi\Login\LoginWidget.cpp" />
     <ClCompile Include="src\ClientUi\MainWindow\MainWindow.cpp" />
     <ClCompile Include="src\ClientUi\MainWindow\titlewidget.cpp" />
@@ -141,6 +148,8 @@
   <ItemGroup>
     <QtUic Include="src\ClientUi\Compent\SearchLineEdit.ui" />
     <QtUic Include="src\ClientUi\Download\CDownloadDialog.ui" />
+    <QtUic Include="src\ClientUi\Download\CompletedListWidget.ui" />
+    <QtUic Include="src\ClientUi\Download\DownloadListWidget.ui" />
     <QtUic Include="src\ClientUi\Login\LoginWidget.ui" />
     <QtUic Include="src\ClientUi\MainWindow\MainWindow.ui" />
     <QtUic Include="src\ClientUi\VideoList\VideoDetailWidget.ui" />
@@ -166,6 +175,8 @@
     <QtMoc Include="src\ClientUi\Compent\SearchLineEdit.h" />
     <ClInclude Include="src\ClientUi\Config\SingleConfigRander.h" />
     <QtMoc Include="src\ClientUi\Download\CDownloadDialog.h" />
+    <QtMoc Include="src\ClientUi\Download\DownloadListWidget.h" />
+    <QtMoc Include="src\ClientUi\Download\CompletedListWidget.h" />
     <ClInclude Include="src\Download\AbstractTransmission.h" />
     <ClInclude Include="src\Download\Downloader.h" />
     <ClInclude Include="src\FFmpeg\FFmpegLog.h" />

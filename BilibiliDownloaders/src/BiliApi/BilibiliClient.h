@@ -25,6 +25,11 @@ public:
 
     VideoView GetVideoView(const std::string& bvid);
     PlayUrl GetPlayUrl(long long cid, long long qn, const std::string& bvid);
+    LoginUrlOrigin GetLoginUrl();
+    LoginStatusScanning GetLoginStatus(const std::string& oauthKey);
+    
+    void SetLogined(bool logined);
+    bool GetLogined() const;
 
     
     static nlohmann::json GetDataFromRespones(const std::string& respones);
@@ -38,7 +43,7 @@ private:
     BilibiliClient(BilibiliClient&& other) = delete;
     BilibiliClient& operator=(BilibiliClient&& other) = delete;
 
-     
+    volatile bool m_logined;
 };
 
 } // BiliApi

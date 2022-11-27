@@ -43,6 +43,7 @@ if len(str_ss) = 1 then str_ss = "0"&str_ss
 set fs = wscript.CreateObject("Scripting.FileSystemObject")
 set ts_hash = fs.OpenTextFile("temp_hash.txt", 1)
 str_hash = ts_hash.readline()
+str_hash = Left(str_hash, 9)
 ts_hash.close
 
 set ts_content = fs.OpenTextFile("src/AppVersion.h", 1)

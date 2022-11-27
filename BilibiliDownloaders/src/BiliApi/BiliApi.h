@@ -31,13 +31,15 @@ protected:
 // 支持json转任意类型
 template<typename ProtocolType,
     typename std::enable_if<std::is_convertible<const ProtocolType&, Protocol>::value, int>::type = 0>
-    void to_json(nlohmann::json& j, const ProtocolType& p) {
+void to_json(nlohmann::json& j, const ProtocolType& p) 
+{
     j = p.GetJson();
 }
 
 template<typename ProtocolType,
     typename std::enable_if<std::is_convertible<const ProtocolType&, Protocol>::value, int>::type = 0>
-    void from_json(const nlohmann::json& j, ProtocolType& p) {
+void from_json(const nlohmann::json& j, ProtocolType& p) 
+{
     p.SetJson(j);
 }
 
@@ -604,7 +606,153 @@ public:
     const PlayUrlDash GetDash() const { return m_json["dash"]; }
 
     void SetSupportFormats(const std::list<PlayUrlSupportFormat>& supportFormats) { m_json["support_formats"] = supportFormats; }
-    const std::list<PlayUrlSupportFormat>& GetSupportFormats() const { return m_json["support_formats"]; }
+    const std::list<PlayUrlSupportFormat> GetSupportFormats() const { return m_json["support_formats"]; }
+};
+
+// https://passport.bilibili.com/qrcode/getLoginUrl
+class LoginUrl : public Protocol 
+{
+public:
+    void SetOauthKey(const std::string& oauthKey)
+    {
+        m_json["oauthKey"] = oauthKey;
+    }
+    const std::string GetOauthKey() const
+    {
+        return m_json["oauthKey"];
+    }
+    void SetUrl(const std::string& url)
+    {
+        m_json["url"] = url;
+    }
+    const std::string GetUrl() const
+    {
+        return m_json["url"];
+    }
+};
+
+class LoginUrlOrigin : public Protocol
+{
+public:
+    LoginUrl GetData() const
+    {
+        return m_json["data"];
+    }
+    //void SetData(const LoginUrl& data)
+    //{
+    //    m_json["data"] = data;
+    //}
+    void SetStatus(bool status)
+    {
+        m_json["status"] = status;
+    }
+    bool GetStatus() const
+    {
+        return m_json["status"];
+    }
+};
+
+
+// https://passport.bilibili.com/qrcode/getLoginInfo
+class LoginStatusData : public Protocol 
+{
+public:
+    void SetUrl(const std::string& url)
+    {
+        m_json["url"] = url;
+    }
+    const std::string GetUrl() const
+    {
+        return m_json["url"];
+    }
+};
+
+class LoginStatusScanning : public Protocol 
+{
+public:
+    LoginStatusData GetData() const
+    {
+        return m_json["data"];
+    }
+    //void SetData(const LoginStatusData& data)
+    //{
+    //     m_json["data"] = data;
+    // }
+    void SetStatus(bool status)
+    {
+        m_json["status"] = status;
+    }
+    bool GetStatus() const
+    {
+        return m_json["status"];
+    }
+    void SetMessage(const std::string& message)
+    {
+        m_json["message"] = message;
+    }
+    const std::string GetMessage() const
+    {
+        return m_json["message"];
+    }
+};
+
+class LoginStatus : public Protocol 
+{
+public:
+    int GetCode() const
+    {
+        return m_json["code"];
+    }
+    void SetData(int code)
+    {
+         m_json["code"] = code;
+    }
+    void SetStatus(bool status)
+    {
+        m_json["status"] = status;
+    }
+    bool GetStatus() const
+    {
+        return m_json["status"];
+    }
+    void SetMessage(const std::string& message)
+    {
+        m_json["message"] = message;
+    }
+    const std::string GetMessage() const
+    {
+        return m_json["message"];
+    }
+
+};
+
+class LoginStatusReady : public Protocol 
+{
+public:
+    int GetCode() const
+    {
+        return m_json["code"];
+    }
+    void SetData(int code)
+    {
+        m_json["code"] = code;
+    }
+    LoginStatusData GetData() const
+    {
+        return m_json["data"];
+    }
+    // void SetData(const LoginStatusData& data)
+    //{
+    //      m_json["data"] = data;
+    //  }
+    void SetStatus(bool status)
+    {
+        m_json["status"] = status;
+    }
+    bool GetStatus() const
+    {
+        return m_json["status"];
+    }
 };
 
 } // namespace BiliApi

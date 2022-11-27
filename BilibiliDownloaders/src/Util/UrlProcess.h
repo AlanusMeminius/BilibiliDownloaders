@@ -44,6 +44,7 @@ public:
 };
 
 static constexpr char splicalChars[] = "?¡°¡±/\<>*|:";
+
 class FileHelp
 {
 public:
