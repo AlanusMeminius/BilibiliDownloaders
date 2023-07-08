@@ -5,5 +5,7 @@
         <file>file-text.svg</file>
         <file>server.svg</file>
         <file>search.svg</file>
+        <file>settings.svg</file>
+        <file>sort.svg</file>
     </qresource>
 </RCC>

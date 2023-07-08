@@ -12,13 +12,13 @@ private:
 	Logger();
 	~Logger();
 
-	// µ¥Àı½ûÖ¹
+	// å•ä¾‹ç¦æ­¢
 	Logger(const Logger& other) = delete;
 	Logger& operator=(const Logger& other) = delete;
     Logger(Logger&& other) = delete;
     Logger& operator=(Logger&& other) = delete;
 
-	// ×¢²áloggerºÍÉèÖÃ
+	// æ³¨å†Œloggerå’Œè®¾ç½®
 	void RegisterLogger(const std::string& logName);
 	void SetLog();
 

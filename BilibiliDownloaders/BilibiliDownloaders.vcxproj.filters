@@ -129,9 +129,6 @@
     <ClCompile Include="src\ClientUi\Login\LoginWidget.cpp">
       <Filter>Source Files\ClientUi\Login</Filter>
     </ClCompile>
-    <ClCompile Include="src\ClientUi\Config\SingleConfigRander.cpp">
-      <Filter>Source Files\Config</Filter>
-    </ClCompile>
     <ClCompile Include="src\ClientUi\Compent\SearchLineEdit.cpp">
       <Filter>Source Files\ClientUi\Compent</Filter>
     </ClCompile>
@@ -146,6 +143,15 @@
     </ClCompile>
     <ClCompile Include="src\ClientUi\Download\CompletedListWidget.cpp">
       <Filter>Source Files\ClientUi\Download</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Config\SingleConfigRander.cpp">
+      <Filter>Source Files\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sqlite\AbstractTable.cpp">
+      <Filter>Source Files\Sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sqlite\SQLiteManager.cpp">
+      <Filter>Source Files\Sqlite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -272,14 +278,23 @@
     <ClInclude Include="src\BiliApi\BilibiliClient.h">
       <Filter>Source Files\BiliApi</Filter>
     </ClInclude>
-    <ClInclude Include="src\ClientUi\Config\SingleConfigRander.h">
-      <Filter>Source Files\Config</Filter>
-    </ClInclude>
     <ClInclude Include="src\Download\AbstractTransmission.h">
       <Filter>Source Files\Download</Filter>
     </ClInclude>
     <ClInclude Include="src\Download\Downloader.h">
       <Filter>Source Files\Download</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Config\SingleConfigRander.h">
+      <Filter>Source Files\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sqlite\AbstractTable.h">
+      <Filter>Source Files\Sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sqlite\SQLiteManager.h">
+      <Filter>Source Files\Sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sqlite\SQLiteLog.h">
+      <Filter>Source Files\Sqlite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

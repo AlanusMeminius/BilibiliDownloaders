@@ -9,7 +9,7 @@
 
 int GenerateMiniDump(PEXCEPTION_POINTERS pExceptionPointers)
 {
-    // ¶¨Òåº¯ÊıÖ¸Õë
+    // å®šä¹‰å‡½æ•°æŒ‡é’ˆ
     typedef BOOL(WINAPI* MiniDumpWriteDumpT)(
         HANDLE,
         DWORD,
@@ -19,7 +19,7 @@ int GenerateMiniDump(PEXCEPTION_POINTERS pExceptionPointers)
         PMINIDUMP_USER_STREAM_INFORMATION,
         PMINIDUMP_CALLBACK_INFORMATION);
 
-    // ´Ó "DbgHelp.dll" ¿âÖĞ»ñÈ¡ "MiniDumpWriteDump" º¯Êı
+    // ä» "DbgHelp.dll" åº“ä¸­è·å– "MiniDumpWriteDump" å‡½æ•°
     MiniDumpWriteDumpT pfnMiniDumpWriteDump = nullptr;
     HMODULE hDbgHelp = LoadLibrary(L"DbgHelp.dll");
     if (nullptr == hDbgHelp)
@@ -33,7 +33,7 @@ int GenerateMiniDump(PEXCEPTION_POINTERS pExceptionPointers)
         return EXCEPTION_CONTINUE_EXECUTION;
     }
 
-    // ´´½¨ dump ÎÄ¼ş¼Ğ
+    // åˆ›å»º dump æ–‡ä»¶å¤¹
     wchar_t szFileName[MAX_PATH] = { 0 };
     QString dirPath = QApplication::applicationDirPath() + "/dump/";
     QDir dir;
@@ -42,7 +42,7 @@ int GenerateMiniDump(PEXCEPTION_POINTERS pExceptionPointers)
         dir.mkpath(dirPath);
     }
 
-    // ´´½¨ dump ÎÄ¼ş
+    // åˆ›å»º dump æ–‡ä»¶
     std::wstring appName = QApplication::applicationName().toStdWString();
     SYSTEMTIME stLocalTime;
     ::GetLocalTime(&stLocalTime);
@@ -57,7 +57,7 @@ int GenerateMiniDump(PEXCEPTION_POINTERS pExceptionPointers)
         return EXCEPTION_CONTINUE_EXECUTION;
     }
 
-    // Ğ´Èë dump ÎÄ¼ş
+    // å†™å…¥ dump æ–‡ä»¶
     MINIDUMP_EXCEPTION_INFORMATION expParam;
     expParam.ThreadId = ::GetCurrentThreadId();
     expParam.ExceptionPointers = pExceptionPointers;
@@ -65,7 +65,7 @@ int GenerateMiniDump(PEXCEPTION_POINTERS pExceptionPointers)
     pfnMiniDumpWriteDump(::GetCurrentProcess(), ::GetCurrentProcessId(),
         hDumpFile, MiniDumpWithFullMemory, (pExceptionPointers ? &expParam : nullptr), nullptr, nullptr);
     
-    // ÊÍ·ÅÎÄ¼ş
+    // é‡Šæ”¾æ–‡ä»¶
     ::CloseHandle(hDumpFile);
     ::FreeLibrary(hDbgHelp);
 
@@ -74,7 +74,7 @@ int GenerateMiniDump(PEXCEPTION_POINTERS pExceptionPointers)
 
 LONG ExceptionFilter(LPEXCEPTION_POINTERS lpExceptionInfo)
 {
-    // ÕâÀï×öÒ»Ğ©Òì³£µÄ¹ıÂË»òÌáÊ¾
+    // è¿™é‡Œåšä¸€äº›å¼‚å¸¸çš„è¿‡æ»¤æˆ–æç¤º
     if (IsDebuggerPresent())
     {
         return EXCEPTION_CONTINUE_SEARCH;

@@ -72,7 +72,7 @@ void TitleWidget::mouseDoubleClickEvent(QMouseEvent* event)
 
 void TitleWidget::paintEvent(QPaintEvent*)
 {
-    // 为了使用qss
+    // ??????qss
     QStyleOption opt;
     opt.init(this);
     QPainter p(this);

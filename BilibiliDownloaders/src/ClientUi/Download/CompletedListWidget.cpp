@@ -6,11 +6,22 @@ CompletedListItemWidget::CompletedListItemWidget(QWidget *parent)
     , ui(new Ui::CompletedListItemWidget())
 {
     ui->setupUi(this);
+    SetUi();
+
+    SignalsAndSlots();
 }
 
 CompletedListItemWidget::~CompletedListItemWidget()
 {
     delete ui;
+}
+
+void CompletedListItemWidget::SetUi()
+{
+}
+
+void CompletedListItemWidget::SignalsAndSlots()
+{
 }
 
 CompletedListWidget::CompletedListWidget(QWidget* parent)

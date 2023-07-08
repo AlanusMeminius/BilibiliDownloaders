@@ -1,39 +1,43 @@
-
-#include "SQLiteDatabase.h"
-
 #include <sqlite3.h>
 
+#include "SQLiteDatabase.h"
+#include "SQLiteLog.h"
 
-namespace {
-    constexpr char ListTablesSql[] = "SELECT name"
-        "  FROM"
-        "    (SELECT * FROM sqlite_master UNION ALL"
-        "    SELECT * FROM sqlite_temp_master)"
-        "  WHERE type='table'"
-        "  ORDER BY name";
-    constexpr char ListViewsSql[] = "SELECT name"
-        "  FROM"
-        "    (SELECT * FROM sqlite_master UNION ALL"
-        "    SELECT * FROM sqlite_temp_master)"
-        "  WHERE type='view'"
-        "  ORDER BY name";
 
-    // sqlite3_exec() callback used in tables() and views().
-    auto ListCallback = [](void* ptr, int, char** data, char**) 
-    {
-        static_cast<QStringList*>(ptr)->append(QString::fromUtf8(data[0]));
-        return 0;
-    };
-} // namespace
+namespace SQLite
+{
+constexpr char ListTablesSql[] = "SELECT name"
+    "  FROM"
+    "    (SELECT * FROM sqlite_master UNION ALL"
+    "    SELECT * FROM sqlite_temp_master)"
+    "  WHERE type='table'"
+    "  ORDER BY name";
+constexpr char ListViewsSql[] = "SELECT name"
+    "  FROM"
+    "    (SELECT * FROM sqlite_master UNION ALL"
+    "    SELECT * FROM sqlite_temp_master)"
+    "  WHERE type='view'"
+    "  ORDER BY name";
 
-SQLiteDatabase::SQLiteDatabase(const QString& path)
+auto ListCallback = [](void* ptr, int, char** data, char**) 
+{
+    static_cast<QStringList*>(ptr)->append(QString::fromUtf8(data[0]));
+    return 0;
+};
+
+
+SQLiteDatabase::SQLiteDatabase(const std::string& path)
+    : m_db(nullptr)
+    , m_stmt(nullptr)
 {
     if (sqlite3_initialize() != SQLITE_OK) 
     {
+        SQLITE_LOG_ERROR("sqlite3_initialize error: {}", m_lastError.c_str());
         return;
     }
 
-    if (sqlite3_open16(path.constData(), &m_db) != SQLITE_OK) 
+    SQLITE_LOG_INFO("sqlite3 path: {}", path.c_str());
+    if (sqlite3_open(path.c_str(), &m_db) != SQLITE_OK) 
     {
         updateLastError();
         close();
@@ -59,15 +63,17 @@ QStringList SQLiteDatabase::tables()
     }
 
     QStringList list;
-    char* errmsg = nullptr;
-    const int rc = sqlite3_exec(m_db, ListTablesSql, ListCallback, &list, &errmsg);
+    char*       errmsg = nullptr;
+    const int   rc = sqlite3_exec(m_db, ListTablesSql, ListCallback, &list, &errmsg);
 
-    if (rc != SQLITE_OK)
+    if (rc != SQLITE_OK) 
     {
-        if (errmsg)
+        if (errmsg) 
         {
-            m_lastError = QString::fromUtf8(errmsg);
+            m_lastError = errmsg;
             sqlite3_free(errmsg);
+            SQLITE_LOG_ERROR("tables error: {}",
+                             m_lastError.c_str());
         }
 
         return {};
@@ -84,15 +90,16 @@ QStringList SQLiteDatabase::views()
     }
 
     QStringList list;
-    char* errmsg = nullptr;
-    const int rc = sqlite3_exec(m_db, ListViewsSql, ListCallback, &list, &errmsg);
+    char*       errmsg = nullptr;
+    const int   rc = sqlite3_exec(m_db, ListViewsSql, ListCallback, &list, &errmsg);
 
-    if (rc != SQLITE_OK)
+    if (rc != SQLITE_OK) 
     {
         if (errmsg) 
         {
-            m_lastError = QString::fromUtf8(errmsg);
+            m_lastError = errmsg;
             sqlite3_free(errmsg);
+            SQLITE_LOG_ERROR("views error: {}", m_lastError.c_str());
         }
 
         return {};
@@ -101,7 +108,7 @@ QStringList SQLiteDatabase::views()
     return list;
 }
 
-bool SQLiteDatabase::prepare(const QString& sql)
+bool SQLiteDatabase::prepare(const std::string& sql)
 {
     if (m_db == nullptr) 
     {
@@ -116,25 +123,20 @@ bool SQLiteDatabase::prepare(const QString& sql)
     m_lastError.clear();
 
     sqlite3_mutex_enter(sqlite3_db_mutex(m_db));
-    const void* pzTail = nullptr;
-    const int res = sqlite3_prepare16_v2(m_db,
-        sql.constData(),
-        (sql.size() + 1) * 2, // 2 = sizeof(QChar)
-        &m_stmt,
-        &pzTail);
+    const char* pzTail = nullptr;
+    const int   res = sqlite3_prepare_v2(m_db, sql.data(),
+                                         sql.size(), &m_stmt, &pzTail);
     sqlite3_mutex_leave(sqlite3_db_mutex(m_db));
 
     if (res != SQLITE_OK) 
     {
-        // "Unable to execute statement"
         updateLastError();
         finalize();
         return false;
     }
 
-    if (pzTail && !QString(static_cast<const QChar*>(pzTail)).trimmed().isEmpty()) 
+    if (pzTail && !std::string(pzTail).empty()) 
     {
-        // Unable to execute multiple statements at a time
         updateLastError();
         finalize();
         return false;
@@ -170,7 +172,7 @@ bool SQLiteDatabase::next()
     return false;
 }
 
-bool SQLiteDatabase::execute(const QString& sql)
+bool SQLiteDatabase::execute(const std::string& sql)
 {
     if (m_db == nullptr) 
     {
@@ -179,15 +181,17 @@ bool SQLiteDatabase::execute(const QString& sql)
 
     m_lastError.clear();
 
-    char* errmsg = nullptr;
-    const int rc = sqlite3_exec(m_db, sql.toUtf8(), nullptr, nullptr, &errmsg);
+    char*     errmsg = nullptr;
+    const int rc = sqlite3_exec(m_db, sql.data(), nullptr, nullptr, &errmsg);
 
     if (rc != SQLITE_OK) 
     {
         if (errmsg) 
         {
-            m_lastError = QString::fromUtf8(errmsg);
+            m_lastError = errmsg;
             sqlite3_free(errmsg);
+            SQLITE_LOG_ERROR(
+                "sqlite3_exec error: {}, sql:{} ", m_lastError.c_str(), sql.c_str());
         }
         return false;
     }
@@ -195,19 +199,19 @@ bool SQLiteDatabase::execute(const QString& sql)
     return true;
 }
 
-QVariant SQLiteDatabase::value(int index) const
+std::any SQLiteDatabase::value(int index) const
 {
-    Q_ASSERT(index >= 0);
+    assert(index >= 0);
 
-    // sqlite3_data_count() returns 0 if m_stmt is nullptr.
-    if (index >= sqlite3_data_count(m_stmt)) {
-        return QVariant();
+    if (index >= sqlite3_data_count(m_stmt)) 
+    {
+        SQLITE_LOG_WARN("value index out of range: {}", index);
+        return std::any();
     }
 
     sqlite3_mutex_enter(sqlite3_db_mutex(m_db));
     const int type = sqlite3_column_type(m_stmt, index);
-
-    QVariant ret;
+    std::any ret;
 
     switch (type) 
     {
@@ -215,19 +219,58 @@ QVariant SQLiteDatabase::value(int index) const
         ret = sqlite3_column_int64(m_stmt, index);
         break;
     case SQLITE_NULL:
-        ret = QVariant(QVariant::String);
+        ret = std::string();
         break;
     default:
-        ret = QString(static_cast<const QChar*>(sqlite3_column_text16(m_stmt, index)),
-            sqlite3_column_bytes16(m_stmt, index) / 2); // 2 = sizeof(QChar)
+        ret = std::string((const char*)(sqlite3_column_text(m_stmt, index)));
         break;
     }
-
     sqlite3_mutex_leave(sqlite3_db_mutex(m_db));
+
     return ret;
 }
 
-QString SQLiteDatabase::lastError() const
+bool SQLiteDatabase::bind(int index, int type, const std::any& value)
+{
+    assert(index >= 0);
+
+    if (index >= sqlite3_bind_parameter_count(m_stmt))
+    {
+        SQLITE_LOG_WARN("bind index out of range: {}", index);
+        return false;
+    }
+
+    if (type != SQLITE_NULL && !value.has_value()) 
+    {
+        SQLITE_LOG_WARN("bind value is empty, index: {}, type: {}", index, type);
+        return false;
+    }
+
+    int nRet = SQLITE_ERROR;
+    sqlite3_mutex_enter(sqlite3_db_mutex(m_db));
+    switch (type) 
+    {
+    case SQLITE_INTEGER:
+        nRet = sqlite3_bind_int64(m_stmt, index, std::any_cast<sqlite_int64>(value));
+        break;
+    case SQLITE_FLOAT:
+        nRet = sqlite3_bind_double(m_stmt, index, std::any_cast<double>(value));
+        break;
+    case SQLITE_NULL: 
+        nRet = sqlite3_bind_null(m_stmt, index);
+        break;
+    default:
+        nRet = sqlite3_bind_text(m_stmt, index,
+                                 std::any_cast<std::string>(value).c_str(), -1,
+                                 SQLITE_TRANSIENT);
+        break;
+    }
+    sqlite3_mutex_leave(sqlite3_db_mutex(m_db));
+
+    return nRet == SQLITE_OK;
+}
+
+std::string SQLiteDatabase::lastError() const
 {
     return m_lastError;
 }
@@ -251,10 +294,14 @@ void SQLiteDatabase::updateLastError()
         return;
     }
 
-    m_lastError = QString(static_cast<const QChar*>(sqlite3_errmsg16(m_db)));
+    m_lastError = sqlite3_errmsg(m_db);
+    SQLITE_LOG_ERROR("sqlite3 errmsg: {}", m_lastError.c_str());
 }
 
 sqlite3* SQLiteDatabase::handle() const
 {
     return m_db;
 }
+
+} // namespace SQLite
+

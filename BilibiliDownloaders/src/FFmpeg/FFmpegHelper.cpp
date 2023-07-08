@@ -33,7 +33,7 @@ bool FFmpegHelper::MegerVideo(const std::string& audio, const std::string& video
 void FFmpegHelper::StartFFpmegAsync(const std::string& audio, const std::string& video, const std::string& destionVideo)
 {
     std::future<bool> result = std::async(std::launch::async, [&]()->bool {
-        STARTUPINFO si;                // 启动信息
+        STARTUPINFO si;              
         ZeroMemory(&si, sizeof(si));
         si.cb = sizeof(si);
         QString ffmpegExeFilename;
@@ -46,22 +46,22 @@ void FFmpegHelper::StartFFpmegAsync(const std::string& audio, const std::string&
 #ifdef  _DEBUG
         Flag = CREATE_NEW_CONSOLE;
 #else
-        Flag = CREATE_NO_WINDOW;                            // 没有创建标志
+        Flag = CREATE_NO_WINDOW;                            
 #endif //  _DEBUG
 
-        // 创建子进程，并判断是否成功
-        if (!::CreateProcess((LPWSTR)ffmpegExeFilename.toStdWString().c_str(),              // 启动程序名
-            (LPWSTR)ffmpegArg.toStdWString().c_str(),                     // 启参数
-            NULL,                                          // 不继承进程句柄
-            NULL,                                          // 不继承线程句柄
-            FALSE,                                         // 不继承句柄
-            Flag,                                             // 没有创建标志
-            NULL,                                          // 使用父进程环境变量
-            NULL,                                          // 使用父进程目录作为当前目录
-            &si,                                           // STARTUPINFO 结构
-            &m_pi))                                        // PROCESS_INFORMATION 保存相关信息
+
+        if (!::CreateProcess((LPWSTR)ffmpegExeFilename.toStdWString().c_str(),              
+            (LPWSTR)ffmpegArg.toStdWString().c_str(),                     
+            NULL,                                         
+            NULL,                                         
+            FALSE,                                         
+            Flag,                                          
+            NULL,                                          
+            NULL,                                       
+            &si,                                           
+            &m_pi))                                  
         {
-            // 创建失败
+
             qDebug() << QString("create ffmpeg.exe failed, error code: %1").arg(::GetLastError());
             return false;
         }

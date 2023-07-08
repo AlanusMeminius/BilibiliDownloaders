@@ -6,11 +6,22 @@ DownloadListItemWidget::DownloadListItemWidget(QWidget *parent)
     , ui(new Ui::DownloadListItemWidget())
 {
     ui->setupUi(this);
+    SetUi();
+
+    SignalsAndSlots();
 }
 
 DownloadListItemWidget::~DownloadListItemWidget()
 {
     delete ui;
+}
+
+void DownloadListItemWidget::SetUi()
+{
+}
+
+void DownloadListItemWidget::SignalsAndSlots()
+{
 }
 
 DownloadListWidget::DownloadListWidget(QWidget* parent)

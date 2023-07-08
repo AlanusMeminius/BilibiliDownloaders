@@ -7,6 +7,8 @@
 #include "BiliApi/BilibiliClient.h"
 #include "Aria2Net/AriaClient/AriaClient.h"
 #include "FFmpeg/FFmpegHelper.h"
+#include "Config/SingleConfigRander.h"
+#include "Sqlite/SQLiteManager.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,7 +17,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     SetUi();
 
-    // �ޱ߿�
+    SingleConfigRander::getInstance();
+    SQLite::SQLiteManager::getInstance();
+    // �ޱ߿�
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
     setWindowTitle(tr("Bili Downloader"));
     SignalsAndSlots();
@@ -47,19 +51,19 @@ void MainWindow::SearchUrl()
 
     BiliApi::BilibiliClient& biliClient = BiliApi::BilibiliClient::GetInstance();
     BiliApi::VideoView videoView = biliClient.GetVideoView(bvid);
-    BiliApi::PlayUrl playUrl = biliClient.GetPlayUrl(videoView.GetCid(), 125, videoView.GetBvid());
+    BiliApi::PlayUrl playUrl = biliClient.GetPlayUrl(videoView.cid, 125, videoView.bvid);
 
     std::list<std::string> video_urls;
     std::list<std::string> audio_urls;
-    auto videos = playUrl.GetDash().GetVideo();
+    auto videos = playUrl.dash.video;
     for (const auto& video : videos)
     {
-        video_urls.push_back(video.GetBaseUrl());
+        video_urls.push_back(video.base_url);
     }
-    auto audioes = playUrl.GetDash().GetAudio();
+    auto audioes = playUrl.dash.audio;
     for (const auto& audio : audioes)
     {
-        audio_urls.push_back(audio.GetBaseUrl());
+        audio_urls.push_back(audio.base_url);
     }
 
     QDir dir("Download");

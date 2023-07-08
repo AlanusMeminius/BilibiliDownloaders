@@ -2,6 +2,40 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>CDownloadDialog</name>
+    <message>
+        <location filename="../src/ClientUi/Download/CDownloadDialog.ui" line="14"/>
+        <source>CDownloadDialog</source>
+        <translation>下载管理</translation>
+    </message>
+    <message>
+        <location filename="../src/ClientUi/Download/CDownloadDialog.ui" line="66"/>
+        <source>Download</source>
+        <translation>下载中</translation>
+    </message>
+    <message>
+        <location filename="../src/ClientUi/Download/CDownloadDialog.ui" line="86"/>
+        <source>Complete</source>
+        <translation>已下载</translation>
+    </message>
+</context>
+<context>
+    <name>CompletedListItemWidget</name>
+    <message>
+        <location filename="../src/ClientUi/Download/CompletedListWidget.ui" line="14"/>
+        <source>CompletedListWidget</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DownloadListItemWidget</name>
+    <message>
+        <location filename="../src/ClientUi/Download/DownloadListWidget.ui" line="14"/>
+        <source>DownloadListWidget</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LoginWidget</name>
     <message>
         <location filename="../src/ClientUi/Login/LoginWidget.ui" line="14"/>
@@ -14,14 +48,19 @@
     <message>
         <location filename="../src/ClientUi/MainWindow/MainWindow.ui" line="14"/>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../src/ClientUi/MainWindow/MainWindow.ui" line="119"/>
-        <location filename="../src/ClientUi/MainWindow/MainWindow.ui" line="132"/>
-        <location filename="../src/ClientUi/MainWindow/MainWindow.ui" line="145"/>
+        <location filename="../src/ClientUi/MainWindow/MainWindow.ui" line="212"/>
+        <location filename="../src/ClientUi/MainWindow/MainWindow.ui" line="250"/>
+        <location filename="../src/ClientUi/MainWindow/MainWindow.ui" line="288"/>
         <source>PushButton</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/ClientUi/MainWindow/MainWindow.cpp" line="24"/>
+        <source>Bili Downloader</source>
+        <translation>本站下载姬</translation>
     </message>
 </context>
 <context>
@@ -35,7 +74,7 @@
 <context>
     <name>TitleWidget</name>
     <message>
-        <location filename="../src/ClientUi/MainWindow/titlewidget.cpp" line="22"/>
+        <location filename="../src/ClientUi/MainWindow/titlewidget.cpp" line="29"/>
         <source>Maximize</source>
         <translation type="unfinished"></translation>
     </message>
@@ -58,7 +97,7 @@
     <message>
         <location filename="../src/ClientUi/VideoList/VideoListWidget.ui" line="57"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">标题</translation>
     </message>
     <message>
         <location filename="../src/ClientUi/VideoList/VideoListWidget.ui" line="70"/>
@@ -68,7 +107,7 @@
     <message>
         <location filename="../src/ClientUi/VideoList/VideoListWidget.ui" line="83"/>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">时长</translation>
     </message>
 </context>
 <context>

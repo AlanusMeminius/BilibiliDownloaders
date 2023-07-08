@@ -137,4 +137,5 @@ QImage qr_code(std::string _src_str, std::string _dst_bmp_path)
         return image;
     }
 
+    return QImage();
 }

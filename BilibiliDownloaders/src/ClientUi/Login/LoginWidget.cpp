@@ -46,8 +46,8 @@ void LoginWidget::SignalsAndSlots()
 void LoginWidget::GetLoginOrc() 
 {
     auto        loginUrl = BiliApi::BilibiliClient::GetInstance().GetLoginUrl();
-    std::string strLoginUrl = loginUrl.GetData().GetUrl();
-    m_strOauthKey           = loginUrl.GetData().GetOauthKey();
+    std::string strLoginUrl = loginUrl.data.url;
+    m_strOauthKey           = loginUrl.data.oauthKey;
     if (!m_strOauthKey.empty()) 
     {
         m_bIsrc = true;
@@ -97,8 +97,8 @@ QImage LoginWidget::Qrcode(const std::string& content)
                     {
                         for (int n = 0; n < 8; n++) 
                         {
-                            //ÒÔÏÂÈýÐÐÊÇÉèÖÃÈý»ùÉ« Èý»ùÉ«ÉèÖÃ0x00
-                            //Ôò¶þÎ¬ÂëÑÕÉ«¾ÍÊÇºÚÉ«µÄ
+                            //ä»¥ä¸‹ä¸‰è¡Œæ˜¯è®¾ç½®ä¸‰åŸºè‰² ä¸‰åŸºè‰²è®¾ç½®0x00
+                            //åˆ™äºŒç»´ç é¢œè‰²å°±æ˜¯é»‘è‰²çš„
                             *(pDestData + n * 3 + unWidthAdjusted * l) = 0xff;
                             *(pDestData + 1 + n * 3 + unWidthAdjusted * l) =
                                 0x00;
@@ -115,8 +115,8 @@ QImage LoginWidget::Qrcode(const std::string& content)
         // output the bmp file
         QImage image(pRGBData, unWidth * 8, unWidth * 8, unWidthAdjusted,
                      QImage::Format_BGR888);
-        image.save("test1.bmp");
         image = image.copy();
+
         // Free data
         free(pRGBData);
         QRcode_free(pQRC);
@@ -185,14 +185,14 @@ void LoginWidget::MonitorStatus()
         m_cv.wait(lk, [&]() { return !m_strOauthKey.empty(); });
 
         auto loginUrlStatus = BiliApi::BilibiliClient::GetInstance().GetLoginStatus(m_strOauthKey);
-        auto json = loginUrlStatus.GetJson();
+        auto json = nlohmann::json::parse(loginUrlStatus.toString());
         if (!json.is_null() && json.contains("code")) 
         {
             BiliApi::LoginStatus loginStatus1(json);
-            int nCode = loginStatus1.GetCode();
+            int nCode = loginStatus1.code;
             switch (nCode) 
             {
-            case -1: // Ã»ÓÐÕâ¸öoauthKey
+            case -1: // æ²¡æœ‰è¿™ä¸ªoauthKey
             {
                 m_strOauthKey.clear();
                 LoginOrcAgain();
@@ -200,19 +200,19 @@ void LoginWidget::MonitorStatus()
             }
             case -2: 
             {
-                // ²»Æ¥ÅäµÄoauthKey£¬³¬Ê±»òÒÑÈ·ÈÏµÄoauthKey
+                // ä¸åŒ¹é…çš„oauthKeyï¼Œè¶…æ—¶æˆ–å·²ç¡®è®¤çš„oauthKey
                 LoginOrcAgain();
                 break;
             }
             case -5: 
             {
-                // ÒÑÉ¨Âë£¬Î´È·ÈÏ
+                // å·²æ‰«ç ï¼Œæœªç¡®è®¤
                 QrcScaned();
                 break;
             }
             case 0: 
             {
-                // ÒÑÉ¨Âë£¬ÒÑÈ·ÈÏ
+                // å·²æ‰«ç ï¼Œå·²ç¡®è®¤
                 //BiliApi::LoginStatusReady loginStatusReady(json);
 
                 emit loginStatus(true);
